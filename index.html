@@ -71,6 +71,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-blogPostOn2026-2-24" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/24/blogPostOn2026-2-24/" class="article-date">
+  <time class="dt-published" datetime="2026-02-24T09:18:56.000Z" itemprop="datePublished">2026-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/02/24/blogPostOn2026-2-24/">blogPostOn2026-2-24</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="结构化绑定声明"><a href="#结构化绑定声明" class="headerlink" title="结构化绑定声明"></a>结构化绑定声明</h2><p>c++17引入 语法：<br><code>auto [a, b] = std::make_pair(1, 2); //example</code><br>必须搭配auto使用。</p>
+<h2 id="容器成员函数"><a href="#容器成员函数" class="headerlink" title="容器成员函数"></a>容器成员函数</h2><p>std::vector<int>::value_type 其中value_type是vector容器的成员类型，在std::vector<int>中value_type是int的别名，其他类型同理</p>
+<p>成员类型定义了成员函数的“输入参数”和“返回值”的规格，是数据交换的媒介</p>
+<ul>
+<li><strong>屏蔽底层细节：</strong> 无论底层是数组、链表还是树，你都可以统一用 <code>container::iterator</code> 来遍历，而不需要关心它具体是一个原始指针还是一个复杂的对象。</li>
+<li><strong>增强代码可移植性：</strong> 比如 <code>size_type</code>，在 32 位系统上可能是 <code>unsigned int</code>，在 64 位系统上是 <code>unsigned long long</code>。通过使用成员类型，你的函数签名永远是 <code>size_type size()</code>，代码不需要修改。</li>
+<li><strong>支持泛型算法：</strong> 标准库中的算法（如 <code>std::sort</code>）通过读取这些成员类型，就能知道该如何处理这个容器。</li>
+</ul>
+<blockquote>
+<p>注：<br><strong>统一接口：</strong> 很多标准库算法（如 <code>std::accumulate</code>）并不直接拿 <code>T</code>，而是通过访问容器内部的 <code>value_type</code> 来保持一致性。<br><strong>类型变换：</strong> 有时候 <code>value_type</code> 可能和模板参数 <code>T</code> 不完全一致（虽然在 <code>vector</code> 中它们是一样的，但在某些特殊容器里可能会有细微差别）。<br><strong>可读性：</strong> <code>value_type</code> 明确指代“这是容器里存的东西”，而 <code>T</code> 只是一个抽象的符号。</p>
+</blockquote>
+<h2 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h2><ul>
+<li><p>typename用在定义模板的代码中，指定 依赖于模板参数的类型名称 是一个类型名而非编译器默认指定的静态成员变量&#x2F;常量类型（值类型）。</p>
+</li>
+<li><p>不应使用noexcept关键字：含有分配内存、打开文件功能的函数</p>
+</li>
+<li><p>移动构造函数的作用就是转移某一处资源的使用权</p>
+<p><code>std::move</code>、右值引用、移动构造函数 三者协同合作实现移动语义</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/02/24/blogPostOn2026-2-24/" data-id="cuida4MJCMCAoVcnPC9gAA1kH" data-title="blogPostOn2026-2-24" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-blogPostOn2026-2-12" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/02/12/blogPostOn2026-2-12/" class="article-date">
@@ -148,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/12/blogPostOn2026-2-12/" data-id="cuidd1R_qP265vlSQLiWBlVAu" data-title="blogPostOn2026_2_12" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/12/blogPostOn2026-2-12/" data-id="cuid-H35Jybs-SgV8PgAfZtIx" data-title="blogPostOn2026_2_12" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -201,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/11/hello-world/" data-id="cuid83yrIAPFXI4ZM-An4l3fa" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/02/11/hello-world/" data-id="cuidcqsi0JA-nd00QRZyKRkSR" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -256,6 +314,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/02/24/blogPostOn2026-2-24/">blogPostOn2026-2-24</a>
+          </li>
         
           <li>
             <a href="/2026/02/12/blogPostOn2026-2-12/">blogPostOn2026_2_12</a>
