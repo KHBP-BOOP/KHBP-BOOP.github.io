@@ -13,8 +13,7 @@
     
 
     
-        <meta name="description" content="结构化绑定声明c++17引入 语法：auto [a, b] = std::make_pair(1, 2); //example必须搭配auto使用。
-容器成员函数std::vector::value_type 其中value_type是vector容器的成员类型，在std::vector中value"/>
+        <meta name="description" content="def Multiply(a, b &amp;#x3D; 1):		#b为缺省参数return a * bdef Multiply(a &amp;#x3D; 1, b &amp;#x3D; 1):	#a, b为缺省参数return a * bdef Multiply(a, b):return a * b对于参数是否要缺省处"/>
     
 
     <!--Author-->
@@ -24,13 +23,12 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="blogPostOn2026-2-24"/>
+        <meta property="og:title" content="Python"/>
     
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="结构化绑定声明c++17引入 语法：auto [a, b] = std::make_pair(1, 2); //example必须搭配auto使用。
-容器成员函数std::vector::value_type 其中value_type是vector容器的成员类型，在std::vector中value"/>
+        <meta property="og:description" content="def Multiply(a, b &amp;#x3D; 1):		#b为缺省参数return a * bdef Multiply(a &amp;#x3D; 1, b &amp;#x3D; 1):	#a, b为缺省参数return a * bdef Multiply(a, b):return a * b对于参数是否要缺省处"/>
     
 
     <!--Open Graph Site Name-->
@@ -57,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>blogPostOn2026-2-24 - Hexo</title>
+    <title>Python - Hexo</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -153,13 +151,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>blogPostOn2026-2-24</h1>
+                    <h1>Python</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2026-02-24
+                            2026-03-18
                         
                     </span>
                 </div>
@@ -181,26 +179,33 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h2 id="结构化绑定声明"><a href="#结构化绑定声明" class="headerlink" title="结构化绑定声明"></a>结构化绑定声明</h2><p>c++17引入 语法：<br><code>auto [a, b] = std::make_pair(1, 2); //example</code><br>必须搭配auto使用。</p>
-<h2 id="容器成员函数"><a href="#容器成员函数" class="headerlink" title="容器成员函数"></a>容器成员函数</h2><p>std::vector<int>::value_type 其中value_type是vector容器的成员类型，在std::vector<int>中value_type是int的别名，其他类型同理</p>
-<p>成员类型定义了成员函数的“输入参数”和“返回值”的规格，是数据交换的媒介</p>
-<ul>
-<li><strong>屏蔽底层细节：</strong> 无论底层是数组、链表还是树，你都可以统一用 <code>container::iterator</code> 来遍历，而不需要关心它具体是一个原始指针还是一个复杂的对象。</li>
-<li><strong>增强代码可移植性：</strong> 比如 <code>size_type</code>，在 32 位系统上可能是 <code>unsigned int</code>，在 64 位系统上是 <code>unsigned long long</code>。通过使用成员类型，你的函数签名永远是 <code>size_type size()</code>，代码不需要修改。</li>
-<li><strong>支持泛型算法：</strong> 标准库中的算法（如 <code>std::sort</code>）通过读取这些成员类型，就能知道该如何处理这个容器。</li>
-</ul>
+                <p>def Multiply(a, b &#x3D; 1):		#b为缺省参数<br>return a * b<br>def Multiply(a &#x3D; 1, b &#x3D; 1):	#a, b为缺省参数<br>return a * b<br>def Multiply(a, b):<br>return a * b<br>对于参数是否要缺省处理，一般都处理或都不处理，或重要的缺省处理 然后放在后面。</p>
+<p>形参的缺省值只会生效一次</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">func</span><span class="params">(a, L[])</span>:			[<span class="number">1</span>]</span></span><br><span class="line"><span class="function">	L.append(a)			[<span class="number">1</span>,<span class="number">2</span>]</span></span><br><span class="line"><span class="function">	return L				[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span></span><br><span class="line"><span class="function">print(func(<span class="number">1</span>))</span></span><br><span class="line"><span class="function">print(func(<span class="number">2</span>))</span></span><br><span class="line"><span class="function">print(func(<span class="number">3</span>))</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">Add</span><span class="params">(a, b)</span>:</span></span><br><span class="line"><span class="function">	return a+b</span></span><br><span class="line"><span class="function">print(Add(<span class="number">1</span>,<span class="number">2</span>))</span></span><br><span class="line"><span class="function">print(Add(a=</span><span class="number">1</span>, b=<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<p>print(*objects, sep&#x3D;’ ‘, end&#x3D;’\n’, file&#x3D;sys.stdout, flush&#x3D;False)<br>objects – 复数，表示可以一次输出多个对象。输出多个对象时，需要用 , 分隔。<br>sep – 用来间隔多个对象，默认值是一个空格。<br>end – 用来设定以什么结尾。默认值是换行符 \n，我们可以换成其他字符串。<br>file – 要写入的文件对象。<br>flush – 输出是否被缓存通常决定于 file，但如果 flush 关键字参数为 True，流会被强制刷新。</p>
+<p>shift + F5			运行程序<br>ctrl + F2			终止程序<br>Alt + 4			将运行页面放在最上层<br>快速注释或取消	ctrl + &#x2F;</p>
+<p>在Python中，并没有像C++那样的自增运算符（如++）</p>
+<p>变量没有固定的类型，ta根据数据的类型的变化而变化</p>
+<p>除法运算 &#x2F; 总是返回浮点数；&#x2F;&#x2F; 表示向下取整除法<br>** 表示乘方 例如 5 ** 2 为 25<br>交互模式中，python用作计算器时变量 _ 会存储上次运算的结果，无需构造，不可赋值（为只读类型）。</p>
+<p>a &#x3D; 2<br>b &#x3D; 2.0<br>则<br>a &#x3D;&#x3D; b</p>
+<p>print(“ab””ab”)<br>print(“ab” “ab”)<br>print(“ab”,”ab”)<br>print(“ab”, “ab”)</p>
+<p>string &#x3D; “Alice”<br>print(string[1:5])<br>合法。</p>
+<p>print(type(string))     —-&gt;     &lt;class ‘str’&gt;</p>
+<p>“A   l   i   c   e”<br>-5 -4 -3 -2 -1<br>0   1   2  3  4</p>
+<p>结束位置的索引对应元素不会打印<br>打印的长度为 结束索引减开始索引</p>
+<p>input会将接收的内容转化为字符串（或字符）</p>
+<p>“abc”+”def”<br>拼接（变量、字面值、表达式均可）<br>“abcdef”</p>
+<p>“abc””def”<br>合并（仅限两个字面值）<br>“abcdef”</p>
+<p>“…” 和 ‘…’ 都是字符串</p>
 <blockquote>
-<p>注：<br><strong>统一接口：</strong> 很多标准库算法（如 <code>std::accumulate</code>）并不直接拿 <code>T</code>，而是通过访问容器内部的 <code>value_type</code> 来保持一致性。<br><strong>类型变换：</strong> 有时候 <code>value_type</code> 可能和模板参数 <code>T</code> 不完全一致（虽然在 <code>vector</code> 中它们是一样的，但在某些特殊容器里可能会有细微差别）。<br><strong>可读性：</strong> <code>value_type</code> 明确指代“这是容器里存的东西”，而 <code>T</code> 只是一个抽象的符号。</p>
+<p>print(r”D:\this”)		带r表示原始字符串，该类字符串不能以奇数个\结束<br>D:\this<br>print(“D:\this”)<br>D:	his</p>
 </blockquote>
-<h2 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h2><ul>
-<li><p>typename用在定义模板的代码中，指定 依赖于模板参数的类型名称 是一个类型名而非编译器默认指定的静态成员变量&#x2F;常量类型（值类型）。</p>
-</li>
-<li><p>不应使用noexcept关键字：含有分配内存、打开文件功能的函数</p>
-</li>
-<li><p>移动构造函数的作用就是转移某一处资源的使用权</p>
-<p><code>std::move</code>、右值引用、移动构造函数 三者协同合作实现移动语义</p>
-</li>
-</ul>
+<p>三重引号”””…”””或’’’…’’’引起来的内容可以跨越多行，自动添加换行符，同时可通过在物理行末尾添加\避免自动添加<br>“””…”””	中无需转义 ‘ 需转义 “ （如需要）<br>‘’’…’’’		中无需转义 “ 需转义 ‘ （如需要）g</p>
+<p>string&#x3D;”abcd”<br>切片<br>string[1:3]</p>
+<p>“字符串” * 次数<br>即<br>“字符串字符串字符串……字符串”</p>
 
 
                 

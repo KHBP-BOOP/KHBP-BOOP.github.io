@@ -1,507 +1,348 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<!-- Head tag -->
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="John Doe"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Hexo"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="Hexo"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="website"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://example.comimg/home-newbg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://example.comimg/home-newbg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Hexo</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/6.5.0/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
 
 <meta name="generator" content="Hexo 8.1.1"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Home</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="https://github.com/KHBP-BOOP">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in the theme's configuration: index_cover -->
+<header class="intro-header" style="background-image: url('/img/home-newbg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Hexo</h1>
+                    <hr class="small">
+                    <span class="subheading"></span>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-blogPostOn2026-3-5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/05/blogPostOn2026-3-5/" class="article-date">
-  <time class="dt-published" datetime="2026-03-05T12:43:59.000Z" itemprop="datePublished">2026-03-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            
+                <div class="post-preview">
+    <a href="/2026/03/18/Python/">
+        <h2 class="post-title">
+            Python
+        </h2>
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/05/blogPostOn2026-3-5/">blogPostOn2026-3-5</a>
-    </h1>
-  
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2026-03-18
+    </p>
+</div>
+<hr>
+            
+                <div class="post-preview">
+    <a href="/2026/03/18/CppConcurrency/">
+        <h2 class="post-title">
+            CppConcurrency
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2026-03-18
+    </p>
+</div>
+<hr>
+            
+                <div class="post-preview">
+    <a href="/2026/03/05/blogPostOn2026-3-5/">
+        <h2 class="post-title">
+            blogPostOn2026-3-5
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2026-03-05
+    </p>
+</div>
+<hr>
+            
+                <div class="post-preview">
+    <a href="/2026/03/01/blogPostOn2026-3-1/">
+        <h2 class="post-title">
+            blogPostOn2026-3-1
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2026-03-01
+    </p>
+</div>
+<hr>
+            
+                <div class="post-preview">
+    <a href="/2026/02/24/blogPostOn2026-2-24/">
+        <h2 class="post-title">
+            blogPostOn2026-2-24
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2026-02-24
+    </p>
+</div>
+<hr>
+            
+                <div class="post-preview">
+    <a href="/2026/02/12/blogPostOn2026-2-12/">
+        <h2 class="post-title">
+            blogPostOn2026_2_12
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2026-02-12
+    </p>
+</div>
+<hr>
+            
+                <div class="post-preview">
+    <a href="/2026/02/11/hello-world/">
+        <h2 class="post-title">
+            Hello World
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2026-02-11
+    </p>
+</div>
+<hr>
+            
 
-      </header>
+            <ul class="pager">
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="static修饰全局函数-全局变量："><a href="#static修饰全局函数-全局变量：" class="headerlink" title="static修饰全局函数&#x2F;全局变量："></a>static修饰全局函数&#x2F;全局变量：</h2><h3 id="修饰全局函数会："><a href="#修饰全局函数会：" class="headerlink" title="修饰全局函数会："></a>修饰全局函数会：</h3><ul>
-<li>函数由外部链接性变为内部链接性，即无法在另一文件中借助extern使用该函数</li>
-<li>使其可在其他文件中定义同名的函数，这是全局函数不允许的</li>
+    
 </ul>
-<blockquote>
-<p>仅当前文件使用某函数时，建议使用static修饰以提高封装性</p>
-</blockquote>
-<h3 id="修饰全局变量会："><a href="#修饰全局变量会：" class="headerlink" title="修饰全局变量会："></a>修饰全局变量会：</h3><ul>
-<li>变量由外部链接性变为内部链接性，即无法在另一文件中借助extern访问该变量</li>
-<li>使其可在其他文件中定义同名的变量，这是全局变量不允许的</li>
-</ul>
-<blockquote>
-<p>需跨文件共享数据时，使用全局变量；需限制范围时使用static修饰以提高安全性</p>
-</blockquote>
-<h2 id="Concurrency-TIPS"><a href="#Concurrency-TIPS" class="headerlink" title="Concurrency TIPS:"></a>Concurrency TIPS:</h2><ul>
-<li><p>线程可被视作轻量级的进程</p>
-</li>
-<li><p>同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同</p>
-</li>
-<li><p>硬件并行：多个处理单元同时执行多个任务</p>
-</li>
-<li><p>并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式</p>
-</li>
-<li><p>两种利用并发提升性能的方式：任务并行、数据并行</p>
-</li>
-<li><p>由于lambda的生命周期可能超出其调用者，故将lambda传递给<strong>其他线程</strong>时<strong>通常</strong>使用值捕获[&#x3D;]更优</p>
-</li>
-<li><p>lambda可捕获在该表达式之前定义的所有局部变量</p>
-</li>
-<li><p>调用join()可以清理线程相关的内存，一个线程只能调用join()一次</p>
-</li>
-<li><p>未对 <code>std::thread</code> 对象显式调用 <code>join()</code> (汇入) 或 <code>detach()</code> (分离)，在其析构时若线程仍处于 joinable 状态，程序会直接调用 <code>std::terminate()</code> 导致<strong>程序崩溃退出</strong></p>
-</li>
-<li><p>分离线程的典型应用场景：”fire and forget”类型的任务或通过其他机制如利用全局标志监控其状态等的任务</p>
-</li>
-</ul>
-
-      
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/05/blogPostOn2026-3-5/" data-id="cuidH5AGTW50TNlJ585lUg8RE" data-title="blogPostOn2026-3-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
+</div>
 
 
 
-  
-    <article id="post-blogPostOn2026-3-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/03/01/blogPostOn2026-3-1/" class="article-date">
-  <time class="dt-published" datetime="2026-03-01T08:53:12.000Z" itemprop="datePublished">2026-03-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/03/01/blogPostOn2026-3-1/">blogPostOn2026-3-1</a>
-    </h1>
-  
+    <!-- Footer -->
+    <hr />
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="std-unordered-map使用"><a href="#std-unordered-map使用" class="headerlink" title="std::unordered_map使用"></a>std::unordered_map使用</h2><ul>
-<li><p>用浮点数做哈希表的键时 因无法总是精确地存储小数会导致无法对应正确的值</p>
-</li>
-<li><p>std::unordered_map无默认的以std::pair&lt;int, int&gt;为键时的哈希映射，需自行设定。</p>
-<p>  例如为了实现std::pair&lt;int, int&gt;类型做std::unordered_map&lt;long long, int&gt;的键 借助位运算</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">static_cast</span>&lt;<span class="type">long</span> <span class="type">long</span>&gt;(num1) &lt;&lt; <span class="number">32</span> | num2</span><br></pre></td></tr></table></figure>
-<p>  实现高32位存储第一个int值，低32位存储第二个int值</p>
-</li>
-</ul>
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
 
-      
+                    
+
+
+                    
+                        <li>
+                            <a href="https://space.bilibili.com/525604116?spm_id_from=333.1007.0.0" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa-brands fa-bilibili fa-stack-1x fa-inverse"></i>
+                                </span> 
+                            </a>
+                        </li>
+                    
+
+
+                    
+                        <li>
+                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2026 John Doe<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/03/01/blogPostOn2026-3-1/" data-id="cuid7RBPbAzdJSxO0WGu708_P" data-title="blogPostOn2026-3-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-blogPostOn2026-2-24" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/02/24/blogPostOn2026-2-24/" class="article-date">
-  <time class="dt-published" datetime="2026-02-24T09:18:56.000Z" itemprop="datePublished">2026-02-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/24/blogPostOn2026-2-24/">blogPostOn2026-2-24</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="结构化绑定声明"><a href="#结构化绑定声明" class="headerlink" title="结构化绑定声明"></a>结构化绑定声明</h2><p>c++17引入 语法：<br><code>auto [a, b] = std::make_pair(1, 2); //example</code><br>必须搭配auto使用。</p>
-<h2 id="容器成员函数"><a href="#容器成员函数" class="headerlink" title="容器成员函数"></a>容器成员函数</h2><p>std::vector<int>::value_type 其中value_type是vector容器的成员类型，在std::vector<int>中value_type是int的别名，其他类型同理</p>
-<p>成员类型定义了成员函数的“输入参数”和“返回值”的规格，是数据交换的媒介</p>
-<ul>
-<li><strong>屏蔽底层细节：</strong> 无论底层是数组、链表还是树，你都可以统一用 <code>container::iterator</code> 来遍历，而不需要关心它具体是一个原始指针还是一个复杂的对象。</li>
-<li><strong>增强代码可移植性：</strong> 比如 <code>size_type</code>，在 32 位系统上可能是 <code>unsigned int</code>，在 64 位系统上是 <code>unsigned long long</code>。通过使用成员类型，你的函数签名永远是 <code>size_type size()</code>，代码不需要修改。</li>
-<li><strong>支持泛型算法：</strong> 标准库中的算法（如 <code>std::sort</code>）通过读取这些成员类型，就能知道该如何处理这个容器。</li>
-</ul>
-<blockquote>
-<p>注：<br><strong>统一接口：</strong> 很多标准库算法（如 <code>std::accumulate</code>）并不直接拿 <code>T</code>，而是通过访问容器内部的 <code>value_type</code> 来保持一致性。<br><strong>类型变换：</strong> 有时候 <code>value_type</code> 可能和模板参数 <code>T</code> 不完全一致（虽然在 <code>vector</code> 中它们是一样的，但在某些特殊容器里可能会有细微差别）。<br><strong>可读性：</strong> <code>value_type</code> 明确指代“这是容器里存的东西”，而 <code>T</code> 只是一个抽象的符号。</p>
-</blockquote>
-<h2 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h2><ul>
-<li><p>typename用在定义模板的代码中，指定 依赖于模板参数的类型名称 是一个类型名而非编译器默认指定的静态成员变量&#x2F;常量类型（值类型）。</p>
-</li>
-<li><p>不应使用noexcept关键字：含有分配内存、打开文件功能的函数</p>
-</li>
-<li><p>移动构造函数的作用就是转移某一处资源的使用权</p>
-<p><code>std::move</code>、右值引用、移动构造函数 三者协同合作实现移动语义</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/24/blogPostOn2026-2-24/" data-id="cuidvSKG3WoiHoELr5xpQFFq9" data-title="blogPostOn2026-2-24" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-blogPostOn2026-2-12" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/02/12/blogPostOn2026-2-12/" class="article-date">
-  <time class="dt-published" datetime="2026-02-12T01:51:21.000Z" itemprop="datePublished">2026-02-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/12/blogPostOn2026-2-12/">blogPostOn2026_2_12</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="std-vector对比std-valarray"><a href="#std-vector对比std-valarray" class="headerlink" title="std::vector&lt;&gt;对比std::valarray&lt;&gt;"></a>std::vector&lt;&gt;对比std::valarray&lt;&gt;</h2><p><code>std::vector</code>是动态通用序列容器，支持快速随机访问和动态扩容，适用于通用数据存储；<code>std::valarray</code>是专为数值计算优化的数组类，不支持动态调整大小，但支持高效的切片、掩码操作和逐元素数学运算。<strong>二者区别在于用途、内存管理及数值计算能力。</strong></p>
-<h4 id="核心区别对比："><a href="#核心区别对比：" class="headerlink" title="核心区别对比："></a><strong>核心区别对比：</strong></h4><ol>
-<li><strong>功能定位</strong>：<ul>
-<li><code>std::vector</code> (STL): 泛型容器，适用于存储、插入、删除任意类型数据，常用于管理动态数组。</li>
-<li><code>std::valarray</code> (数值库): 专注于数值数组，不属于STL容器，不支持 <code>push_back</code>，适用于科学计算。</li>
-</ul>
-</li>
-<li><strong>大小调整</strong>：<ul>
-<li><code>std::vector</code>: 支持 <code>resize()</code>、<code>push_back()</code>，运行时动态增加或减少容量。</li>
-<li><code>std::valarray</code>: 大小固定（或者需要重新赋值），无法动态扩容。</li>
-</ul>
-</li>
-<li><strong>数值运算能力</strong>：<ul>
-<li><code>std::vector</code>: 需要使用循环或 <code>std::transform</code> 进行逐元素计算。</li>
-<li><code>std::valarray</code>: 提供了直接的逐元素数学运算符（如 <code>v1 + v2</code>、<code>v1 * 2.0</code>），且运算速度可能通过编译优化更快。</li>
-</ul>
-</li>
-<li><strong>切片与子集操作</strong>：<ul>
-<li><code>std::valarray</code>: 强项，支持 <code>slice</code> (切片)、<code>gslice</code> (广义切片)、<code>mask</code> (掩码) 和 <code>indirect</code> (间接) 访问。</li>
-<li><code>std::vector</code>: 原生不支持，需要自行编写逻辑或使用STL算法。</li>
-</ul>
-</li>
-</ol>
-<h4 id="总结使用场景："><a href="#总结使用场景：" class="headerlink" title="总结使用场景："></a><strong>总结使用场景：</strong></h4><ol>
-<li>需要灵活大小、插入删除数据时，选择 <strong><code>std::vector</code></strong>。</li>
-<li>需要进行复杂的数学运算（如矩阵加减、向量乘法）、数据分析时，选择 <strong><code>std::valarray</code></strong>。</li>
-</ol>
-<h2 id="类成员访问权限的决定"><a href="#类成员访问权限的决定" class="headerlink" title="类成员访问权限的决定"></a>类成员访问权限的决定</h2><ul>
-<li>默认设定其访问权限为private,按需设定为public、protected</li>
-</ul>
-<h4 id="private：数据-实现细节"><a href="#private：数据-实现细节" class="headerlink" title="private：数据 + 实现细节"></a>private：数据 + 实现细节</h4><p>满足任意一条就应设定为private：</p>
-<ol>
-<li><p>成员<strong>表示对象的状态</strong></p>
-</li>
-<li><p>成员的值需要<strong>保持某种约束&#x2F;不变量</strong></p>
-</li>
-<li><p>外部<strong>不需要也不应该知道它存在</strong></p>
-</li>
-</ol>
-<h4 id="public：稳定的“能力接口”"><a href="#public：稳定的“能力接口”" class="headerlink" title="public：稳定的“能力接口”"></a>public：稳定的“能力接口”</h4><p>一个成员能是 <code>public</code>，必须同时满足：</p>
-<ol>
-<li><p><strong>语义稳定</strong>（不会频繁或大量更改）</p>
-</li>
-<li><p><strong>代表“能做什么”而不是“怎么做”</strong></p>
-</li>
-<li><p><strong>不暴露内部结构</strong></p>
-</li>
-<li><p><strong>不会破坏类的不变量</strong></p>
-</li>
-</ol>
-<h4 id="protected：专门给子类的通道"><a href="#protected：专门给子类的通道" class="headerlink" title="protected：专门给子类的通道"></a>protected：专门给子类的通道</h4><p><strong>明确打算让子类扩展行为</strong>，但又不想对“所有外部用户”开放时设定。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/12/blogPostOn2026-2-12/" data-id="cuidbGpVJv63oK3G_KEF52mQs" data-title="blogPostOn2026_2_12" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/std-valarray/" rel="tag">std::valarray</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B1%BB%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E7%9A%84%E5%86%B3%E5%AE%9A/" rel="tag">类成员访问权限的决定</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/02/11/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-02-11T11:24:21.945Z" itemprop="datePublished">2026-02-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/11/hello-world/" data-id="cuidYEfEu5VbtH8D33T4TsWtl" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/std-valarray/" rel="tag">std::valarray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B1%BB%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E7%9A%84%E5%86%B3%E5%AE%9A/" rel="tag">类成员访问权限的决定</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/std-valarray/" style="font-size: 10px;">std::valarray</a> <a href="/tags/%E7%B1%BB%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E7%9A%84%E5%86%B3%E5%AE%9A/" style="font-size: 10px;">类成员访问权限的决定</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">March 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/03/05/blogPostOn2026-3-5/">blogPostOn2026-3-5</a>
-          </li>
-        
-          <li>
-            <a href="/2026/03/01/blogPostOn2026-3-1/">blogPostOn2026-3-1</a>
-          </li>
-        
-          <li>
-            <a href="/2026/02/24/blogPostOn2026-2-24/">blogPostOn2026-2-24</a>
-          </li>
-        
-          <li>
-            <a href="/2026/02/12/blogPostOn2026-2-12/">blogPostOn2026_2_12</a>
-          </li>
-        
-          <li>
-            <a href="/2026/02/11/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+    <!-- After footer scripts -->
     
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
+<!-- Disqus Comments -->
 
 
 
-
-
-  </div>
 </body>
+
 </html>
