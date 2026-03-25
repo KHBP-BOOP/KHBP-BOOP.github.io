@@ -1,203 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Head tag -->
-<head>
-
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-    <!--Description-->
+    <head>
+    <meta charset="utf-8">
 
     
 
-    
-        <meta name="description" content="线程可被视作轻量级的进程
-同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同
-硬件并行：多个处理单元同时执行多个任务并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式两种利用并发提升性能的方式"/>
-    
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!--Author-->
-    
-        <meta name="author" content="John Doe"/>
-    
-
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="CppConcurrency"/>
-    
-
-    <!--Open Graph Description-->
-    
-        <meta property="og:description" content="线程可被视作轻量级的进程
-同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同
-硬件并行：多个处理单元同时执行多个任务并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式两种利用并发提升性能的方式"/>
-    
-
-    <!--Open Graph Site Name-->
-        <meta property="og:site_name" content="Hexo"/>
-
-    <!--Type page-->
-    
-        <meta property="og:type" content="article"/>
-    
-
-    <!--Page Cover-->
-    
-    
-        <meta property="og:image" content="http://example.comimg/home-newbg.jpg"/>
-    
-
-        <meta name="twitter:card" content="summary_large_image"/>
+    <!--icon-->
 
     
-
     
-        <meta name="twitter:image" content="http://example.comimg/home-newbg.jpg"/>
     
-
-    <!-- Title -->
     
-    <title>CppConcurrency - Hexo</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/6.5.0/featherlight.min.css" type="text/css" rel="stylesheet"/>
-
-    <!-- Google Analytics -->
     
 
 
-    <!-- favicon -->
+    <!-- meta -->
+
+
+<title>CppConcurrency | Hexo</title>
+
+
+    <meta name="keywords" content="concurrency">
+
+
+
+
+    <!-- OpenGraph -->
+
     
+    <meta name="description" content="线程可被视作轻量级的进程 同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同 硬件并行：多个处理单元同时执行多个任务并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式两种利用并发提升性能的方式：任务并行、数据并行 由于lambda的生命周期可能超出其调用者，故将lambda传递给其他线程时通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CppConcurrency">
+<meta property="og:url" content="http://example.com/2026/03/18/CppConcurrency/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="线程可被视作轻量级的进程 同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同 硬件并行：多个处理单元同时执行多个任务并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式两种利用并发提升性能的方式：任务并行、数据并行 由于lambda的生命周期可能超出其调用者，故将lambda传递给其他线程时通">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18T14:32:06.000Z">
+<meta property="article:modified_time" content="2026-03-25T07:16:14.588Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="concurrency">
+<meta name="twitter:card" content="summary_large_image">
+
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+    
+
+    
+
+     
+
+    <!-- custom head -->
 
 <meta name="generator" content="Hexo 8.1.1"></head>
 
-
-<body>
-
-    <!-- Menu -->
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Home</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                
-                    <li>
-                        <a href="/">
-                            
-                                Home
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/archives">
-                            
-                                Archives
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a target="_blank" rel="noopener" href="https://github.com/KHBP-BOOP">
-                            
-                                <i class="fa fa-github fa-stack-2x"></i>
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Home</span>
+        </a>
     </div>
-    <!-- /.container -->
-</nav>
-
-    <!-- Main Content -->
-    <!-- Page Header -->
-<!-- Set your background image for this header in your post front-matter: cover -->
-
-<header class="intro-header" style="background-image: url('/img/home-newbg.jpg')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <h1>CppConcurrency</h1>
-                    
-                    <span class="meta">
-                        <!-- Date and Author -->
-                        
-                        
-                            2026-03-18
-                        
-                    </span>
-                </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friends/" class="navbar-menu button">友链</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
             </div>
-        </div>
+        
+        
+        
+
+        
+        
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">友链</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
+        
     </div>
 </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
 
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
-                    
-                        
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        CppConcurrency
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2026/03/" class="post-meta__date button">2026-03-18</a>
+        
+ 
+        
+    
+    
 
 
-<a href="/tags/concurrency/">#concurrency</a>
+ 
+
+ 
+    </div>
+</div>
 
 
-                    
-                </div>
-                <div class="col-lg-4 col-md-5 post-categories">
-                    
-                </div>
-            
 
-            <!-- Gallery -->
-            
-
-            <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>线程可被视作轻量级的进程</p>
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>线程可被视作轻量级的进程</p>
 <p>同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同</p>
 <p>硬件并行：多个处理单元同时执行多个任务<br>并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式<br>两种利用并发提升性能的方式：任务并行、数据并行</p>
 <p>由于lambda的生命周期可能超出其调用者，故将lambda传递给<strong>其他线程</strong>时<strong>通常</strong>使用值捕获[&#x3D;]更优</p>
@@ -214,88 +161,115 @@
 <p>类类型转换函数：无返回类型、形参的成员函数</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">T</span><span class="params">()</span> <span class="type">const</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
 
-                
-            </div>
+<p>std::thread构造函数利用std::move可以使用将亡值（右值）构造，打破了只能用实参构造的限制</p>
+<p>线程的分离或汇入在对象销毁前决定，对象销毁和函数返回即线程结束无特定前后关系</p>
+<p>以下做法极不可取：意图在函数中创建线程，并让线程访问函数的局部变量身。除非线程肯定会在该函数退出前结束，否则切勿这么做。</p>
 
-            <!-- Comments -->
-            
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    
-
-
-                </div>
-            
-        </div>
     </div>
+     
+    <div class="post-footer__meta"><p>updated at 2026-03-25</p></div> 
+    <div class="post-entry__tags"><a href="/tags/concurrency/" class="post-tags__link button"># concurrency</a></div> 
 </article>
 
-    <!-- Footer -->
-    <hr />
 
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    
-
-                    
-
-
-                    
-                        <li>
-                            <a href="https://space.bilibili.com/525604116?spm_id_from=333.1007.0.0" target="_blank">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa-brands fa-bilibili fa-stack-1x fa-inverse"></i>
-                                </span> 
-                            </a>
-                        </li>
-                    
-
-
-                    
-                        <li>
-                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    
-
-                    
-
-                    
-
-                    
-                </ul>
-                <p class="copyright text-muted">&copy; 2026 John Doe<br></p>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
-            </div>
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2026/03/18/Python/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            Python
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2026/03/05/blogPostOn2026-3-5/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            blogPostOn2026-3-5
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
         </div>
     </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+    
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2026 <a href="/">Hexo</a>
+        </p>
+    
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
 </footer>
 
+        </div>
+         
 
-    <!-- After footer scripts -->
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
     
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+ 
 
-<!-- Bootstrap -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ 
 
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+ 
 
-<!-- Disqus Comments -->
+ 
+
+ 
+
+ 
 
 
 
-</body>
 
+    </body>
 </html>
