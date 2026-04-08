@@ -25,8 +25,10 @@
     <!-- meta -->
 
 
-<title>blogPostOn2026-3-1 | Hexo</title>
+<title>CppConcurrency | Hexo</title>
 
+
+    <meta name="keywords" content="concurrency">
 
 
 
@@ -34,16 +36,16 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="std::unordered_map使用 用浮点数做哈希表的键时 因无法总是精确地存储小数会导致无法对应正确的值  std::unordered_map无默认的以std::pair&lt;int, int&gt;为键时的哈希映射，需自行设定。   例如为了实现std::pair&lt;int, int&gt;类型做std::unordered_map&lt;long long, int&gt;的键">
+    <meta name="description" content="线程可被视作轻量级的进程 同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同 硬件并行：多个处理单元同时执行多个任务并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式两种利用并发提升性能的方式：任务并行、数据并行 由于lambda的生命周期可能超出其调用者，故将lambda传递给其他线程时通">
 <meta property="og:type" content="article">
-<meta property="og:title" content="blogPostOn2026-3-1">
-<meta property="og:url" content="http://example.com/2026/03/01/blogPostOn2026-3-1/index.html">
+<meta property="og:title" content="CppConcurrency">
+<meta property="og:url" content="http://example.com/2026/03/18/cpp-concurrency/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="std::unordered_map使用 用浮点数做哈希表的键时 因无法总是精确地存储小数会导致无法对应正确的值  std::unordered_map无默认的以std::pair&lt;int, int&gt;为键时的哈希映射，需自行设定。   例如为了实现std::pair&lt;int, int&gt;类型做std::unordered_map&lt;long long, int&gt;的键">
+<meta property="og:description" content="线程可被视作轻量级的进程 同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同 硬件并行：多个处理单元同时执行多个任务并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式两种利用并发提升性能的方式：任务并行、数据并行 由于lambda的生命周期可能超出其调用者，故将lambda传递给其他线程时通">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-03-01T08:53:12.000Z">
-<meta property="article:modified_time" content="2026-03-01T09:01:06.917Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:published_time" content="2026-03-18T14:32:06.000Z">
+<meta property="article:modified_time" content="2026-04-08T09:28:52.687Z">
+<meta property="article:tag" content="concurrency">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -119,10 +121,10 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        blogPostOn2026-3-1
+        CppConcurrency
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2026/03/" class="post-meta__date button">2026-03-01</a>
+        <a href="/archives/2026/03/" class="post-meta__date button">2026-03-18</a>
         
  
         
@@ -141,27 +143,38 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="std-unordered-map使用"><a href="#std-unordered-map使用" class="headerlink" title="std::unordered_map使用"></a>std::unordered_map使用</h2><ul>
-<li><p>用浮点数做哈希表的键时 因无法总是精确地存储小数会导致无法对应正确的值</p>
-</li>
-<li><p>std::unordered_map无默认的以std::pair&lt;int, int&gt;为键时的哈希映射，需自行设定。</p>
-<p>  例如为了实现std::pair&lt;int, int&gt;类型做std::unordered_map&lt;long long, int&gt;的键 借助位运算</p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">static_cast</span>&lt;<span class="type">long</span> <span class="type">long</span>&gt;(num1) &lt;&lt; <span class="number">32</span> | num2</span><br></pre></td></tr></table></figure>
-<p>  实现高32位存储第一个int值，低32位存储第二个int值</p>
-</li>
+        <p>线程可被视作轻量级的进程</p>
+<p>同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同</p>
+<p>硬件并行：多个处理单元同时执行多个任务<br>并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式<br>两种利用并发提升性能的方式：任务并行、数据并行</p>
+<p>由于lambda的生命周期可能超出其调用者，故将lambda传递给<strong>其他线程</strong>时<strong>通常</strong>使用值捕获[&#x3D;]更优</p>
+<p>lambda可捕获在该表达式之前定义的所有局部变量</p>
+<ul>
+<li>调用join()可以清理线程相关的内存，一个线程只能调用join()一次</li>
+<li>未对 <code>std::thread</code> 对象显式调用 <code>join()</code> (汇入) 或 <code>detach()</code> (分离)，在其析构时若线程仍处于 joinable 状态，程序会直接调用 <code>std::terminate()</code> 导致<strong>程序崩溃退出</strong></li>
+<li>分离线程的典型应用场景：”fire and forget”类型的任务或通过其他机制如利用全局标志监控其状态等的任务</li>
 </ul>
+<p>当线程运行时，所有必要信息均要传入到线程中，包括存储计算结果的位置<br>可以传递标识符用于识别线程，提高可读性</p>
+<p>std::lock_guard对象尝试上锁；<br>锁是开的，上锁并继续线程；否则等待解锁，接着上锁并继续线程；<br>sdt::lock_guard对象离开作用域，自动解锁。</p>
+<p>互斥量使得不同函数之间以一定的顺序相继执行 是尽力避免恶行数据竞争的一种方式<br>正确地锁定互斥量：<br>不在锁变量的作用域外传递可写共享数据的指针或引用，包括函数返回值和函数形参。</p>
+<p>需explicit修饰的函数：<br>单参数构造函数、形参中除第一个参数外均有缺省值的多参数构造函数<br>多参数构造函数<br>类类型转换函数</p>
+<p>类类型转换函数：无返回类型、形参的成员函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">explicit</span> <span class="keyword">operator</span> <span class="title">T</span><span class="params">()</span> <span class="type">const</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>std::thread构造函数利用std::move可以使用将亡值（右值）构造，打破了只能用实参构造的限制</p>
+<p>线程的分离或汇入在对象销毁前决定，对象销毁和函数返回即线程结束无特定前后关系</p>
+<p>以下做法极不可取：意图在函数中创建线程，并让线程访问函数的局部变量身。除非线程肯定会在该函数退出前结束，否则切勿这么做。</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-03-01</p></div> 
-    <div class="post-entry__tags"></div> 
+    <div class="post-footer__meta"><p>updated at 2026-04-08</p></div> 
+    <div class="post-entry__tags"><a href="/tags/concurrency/" class="post-tags__link button"># concurrency</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2026/03/05/blogPostOn2026-3-5/" class="nav__link">
+                <a href="/2026/03/18/Python/" class="nav__link">
                     <div>
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
                     </div>
@@ -170,7 +183,7 @@
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            blogPostOn2026-3-5
+                            Python
                         </div>
                     </div>
                 </a>
@@ -178,13 +191,13 @@
         </div>
         <div class="nav__next">
             
-                <a href="/2026/02/24/blogPostOn2026-2-24/" class="nav__link">
+                <a href="/2026/02/11/hello-world/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            blogPostOn2026-2-24
+                            Hello World
                         </div>
                     </div>
                     <div>

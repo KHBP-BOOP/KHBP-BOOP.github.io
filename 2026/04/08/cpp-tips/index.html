@@ -25,10 +25,8 @@
     <!-- meta -->
 
 
-<title>blogPostOn2026_2_12 | Hexo</title>
+<title>cpp-tips | Hexo</title>
 
-
-    <meta name="keywords" content="std::valarray, 类成员访问权限的决定">
 
 
 
@@ -38,16 +36,13 @@
     
     <meta name="description" content="std::vector&lt;&gt;对比std::valarray&lt;&gt;std::vector是动态通用序列容器，支持快速随机访问和动态扩容，适用于通用数据存储；std::valarray是专为数值计算优化的数组类，不支持动态调整大小，但支持高效的切片、掩码操作和逐元素数学运算。二者区别在于用途、内存管理及数值计算能力。 核心区别对比： 功能定位： std::vector (STL):">
 <meta property="og:type" content="article">
-<meta property="og:title" content="blogPostOn2026_2_12">
-<meta property="og:url" content="http://example.com/2026/02/12/blogPostOn2026-2-12/index.html">
+<meta property="og:title" content="cpp-tips">
+<meta property="og:url" content="http://example.com/2026/04/08/cpp-tips/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="std::vector&lt;&gt;对比std::valarray&lt;&gt;std::vector是动态通用序列容器，支持快速随机访问和动态扩容，适用于通用数据存储；std::valarray是专为数值计算优化的数组类，不支持动态调整大小，但支持高效的切片、掩码操作和逐元素数学运算。二者区别在于用途、内存管理及数值计算能力。 核心区别对比： 功能定位： std::vector (STL):">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-02-12T01:51:21.000Z">
-<meta property="article:modified_time" content="2026-02-12T13:19:57.990Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="std::valarray">
-<meta property="article:tag" content="类成员访问权限的决定">
+<meta property="article:published_time" content="2026-04-08T09:03:20.000Z">
+<meta property="article:modified_time" content="2026-04-08T09:28:54.822Z">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -123,10 +118,10 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        blogPostOn2026_2_12
+        cpp-tips
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2026/02/" class="post-meta__date button">2026-02-12</a>
+        <a href="/archives/2026/04/" class="post-meta__date button">2026-04-08</a>
         
  
         
@@ -172,6 +167,31 @@
 <li>需要灵活大小、插入删除数据时，选择 <strong><code>std::vector</code></strong>。</li>
 <li>需要进行复杂的数学运算（如矩阵加减、向量乘法）、数据分析时，选择 <strong><code>std::valarray</code></strong>。</li>
 </ol>
+<h2 id="容器成员函数"><a href="#容器成员函数" class="headerlink" title="容器成员函数"></a>容器成员函数</h2><p>std::vector<int>::value_type 其中value_type是vector容器的成员类型，在std::vector<int>中value_type是int的别名，其他类型同理</p>
+<p>成员类型定义了成员函数的“输入参数”和“返回值”的规格，是数据交换的媒介</p>
+<ul>
+<li><strong>屏蔽底层细节：</strong> 无论底层是数组、链表还是树，你都可以统一用 <code>container::iterator</code> 来遍历，而不需要关心它具体是一个原始指针还是一个复杂的对象。</li>
+<li><strong>增强代码可移植性：</strong> 比如 <code>size_type</code>，在 32 位系统上可能是 <code>unsigned int</code>，在 64 位系统上是 <code>unsigned long long</code>。通过使用成员类型，你的函数签名永远是 <code>size_type size()</code>，代码不需要修改。</li>
+<li><strong>支持泛型算法：</strong> 标准库中的算法（如 <code>std::sort</code>）通过读取这些成员类型，就能知道该如何处理这个容器。</li>
+</ul>
+<blockquote>
+<p>注：<br><strong>统一接口：</strong> 很多标准库算法（如 <code>std::accumulate</code>）并不直接拿 <code>T</code>，而是通过访问容器内部的 <code>value_type</code> 来保持一致性。<br><strong>类型变换：</strong> 有时候 <code>value_type</code> 可能和模板参数 <code>T</code> 不完全一致（虽然在 <code>vector</code> 中它们是一样的，但在某些特殊容器里可能会有细微差别）。<br><strong>可读性：</strong> <code>value_type</code> 明确指代“这是容器里存的东西”，而 <code>T</code> 只是一个抽象的符号。</p>
+</blockquote>
+<h2 id="static修饰全局函数-全局变量："><a href="#static修饰全局函数-全局变量：" class="headerlink" title="static修饰全局函数&#x2F;全局变量："></a>static修饰全局函数&#x2F;全局变量：</h2><h3 id="修饰全局函数会："><a href="#修饰全局函数会：" class="headerlink" title="修饰全局函数会："></a>修饰全局函数会：</h3><ul>
+<li>函数由外部链接性变为内部链接性，即无法在另一文件中借助extern使用该函数</li>
+<li>使其可在其他文件中定义同名的函数，这是全局函数不允许的</li>
+</ul>
+<blockquote>
+<p>仅当前文件使用某函数时，建议使用static修饰以提高封装性</p>
+</blockquote>
+<h3 id="修饰全局变量会："><a href="#修饰全局变量会：" class="headerlink" title="修饰全局变量会："></a>修饰全局变量会：</h3><ul>
+<li>变量由外部链接性变为内部链接性，即无法在另一文件中借助extern访问该变量</li>
+<li>使其可在其他文件中定义同名的变量，这是全局变量不允许的</li>
+</ul>
+<blockquote>
+<p>需跨文件共享数据时，使用全局变量；需限制范围时使用static修饰以提高安全性</p>
+</blockquote>
+<p><strong>局部静态变量</strong>：用于需要累加或记录上一次函数调用状态的场景（如计数器），避免使用全局变量导致安全性问题。<br>**静态成员函数：**适用于操作工具性质的任务，如计算类对象创建数量、单例模式、日志记录等不需要依赖特定数据的场景</p>
 <h2 id="类成员访问权限的决定"><a href="#类成员访问权限的决定" class="headerlink" title="类成员访问权限的决定"></a>类成员访问权限的决定</h2><ul>
 <li>默认设定其访问权限为private,按需设定为public、protected</li>
 </ul>
@@ -184,7 +204,7 @@
 <li><p>外部<strong>不需要也不应该知道它存在</strong></p>
 </li>
 </ol>
-<h4 id="public：稳定的“能力接口”"><a href="#public：稳定的“能力接口”" class="headerlink" title="public：稳定的“能力接口”"></a>public：稳定的“能力接口”</h4><p>一个成员能是 <code>public</code>，必须同时满足：</p>
+<h4 id="public：稳定的“能力接口”"><a href="#public：稳定的“能力接口”" class="headerlink" title="public：稳定的“能力接口”"></a>public：稳定的“能力接口”</h4><p>必须同时满足：</p>
 <ol>
 <li><p><strong>语义稳定</strong>（不会频繁或大量更改）</p>
 </li>
@@ -196,41 +216,29 @@
 </li>
 </ol>
 <h4 id="protected：专门给子类的通道"><a href="#protected：专门给子类的通道" class="headerlink" title="protected：专门给子类的通道"></a>protected：专门给子类的通道</h4><p><strong>明确打算让子类扩展行为</strong>，但又不想对“所有外部用户”开放时设定。</p>
+<p>将私有成员的指针或引用设置为成员函数的返回值，可能会造成  绕过private访问权限和互斥量的保护  直接访问私有成员的后果。</p>
+<h2 id="支持拷贝构造但不支持赋值："><a href="#支持拷贝构造但不支持赋值：" class="headerlink" title="支持拷贝构造但不支持赋值："></a>支持拷贝构造但不支持赋值：</h2><p>带有const类型的成员变量的类<br>带有引用类型的成员变量的类</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-02-12</p></div> 
-    <div class="post-entry__tags"><a href="/tags/std-valarray/" class="post-tags__link button"># std::valarray</a><a href="/tags/%E7%B1%BB%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E7%9A%84%E5%86%B3%E5%AE%9A/" class="post-tags__link button"># 类成员访问权限的决定</a></div> 
+    <div class="post-footer__meta"><p>updated at 2026-04-08</p></div> 
+    <div class="post-entry__tags"></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2026/02/24/blogPostOn2026-2-24/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            blogPostOn2026-2-24
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/2026/02/11/hello-world/" class="nav__link">
+                <a href="/2026/04/08/modern-cpp/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            Hello World
+                            modern_cpp
                         </div>
                     </div>
                     <div>
