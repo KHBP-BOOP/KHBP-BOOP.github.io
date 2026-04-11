@@ -34,15 +34,15 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="短选项 连字符 + 字母 支持 连字符 + 双字母 长选项 双连字符 + 字母 万物皆文件 everything is a file. tough filename 创建新空白文件或更改已存在文件的时间戳为当下且不修改内容 命令的最后一个参数对应的文件或目录不存在时，创建新文件或目录（取决于源是文件还是目录）并复制；存在时，覆写该文件或复制至目标目录 当有多个源时，destination必须保证存">
+    <meta name="description" content="万物皆文件 everything is a file. unset命令：_&#x3D;某个变量其中_表示上一条命令的最后一个参数，即上一次执行unset语句时执行的是 unset 某个命令 全局变量在该shell进程及其子shell进程中可读，虽然可写但仅限修改ta的shell进程及其子shell进程 .bash_history 该隐藏文件位于主目录，记录运行过的命令，默认最大记录1000条；可在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux">
 <meta property="og:url" content="http://example.com/2026/03/25/Linux/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="短选项 连字符 + 字母 支持 连字符 + 双字母 长选项 双连字符 + 字母 万物皆文件 everything is a file. tough filename 创建新空白文件或更改已存在文件的时间戳为当下且不修改内容 命令的最后一个参数对应的文件或目录不存在时，创建新文件或目录（取决于源是文件还是目录）并复制；存在时，覆写该文件或复制至目标目录 当有多个源时，destination必须保证存">
+<meta property="og:description" content="万物皆文件 everything is a file. unset命令：_&#x3D;某个变量其中_表示上一条命令的最后一个参数，即上一次执行unset语句时执行的是 unset 某个命令 全局变量在该shell进程及其子shell进程中可读，虽然可写但仅限修改ta的shell进程及其子shell进程 .bash_history 该隐藏文件位于主目录，记录运行过的命令，默认最大记录1000条；可在">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-25T07:16:44.000Z">
-<meta property="article:modified_time" content="2026-04-08T09:28:56.636Z">
+<meta property="article:modified_time" content="2026-04-11T01:55:53.850Z">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -140,10 +140,14 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>短选项 连字符 + 字母</p>
-<p>支持 连字符 + 双字母</p>
-<p>长选项 双连字符 + 字母</p>
-<p>万物皆文件 everything is a file.</p>
+        <p>万物皆文件 everything is a file.</p>
+<p>unset命令：<br>_&#x3D;某个变量<br>其中_表示上一条命令的最后一个参数，即上一次执行unset语句时执行的是 <code>unset 某个命令</code></p>
+<p>全局变量在该shell进程及其子shell进程中可读，虽然可写但仅限修改ta的shell进程及其子shell进程</p>
+<p>.bash_history 该隐藏文件位于主目录，记录运行过的命令，默认最大记录1000条；<br>可在不同终端会话中同步使用，但并不实时更新和实时写入，关闭某一会话时将该会话的历史命令写入，打开某一会话时更新。</p>
+<p>前跟连字符-的为  默认的交互式shell  （如-bash）<br>默认的系统shell  （前无连字符，如 dash）<br>是两个不同的shell</p>
+<p>短选项： 连字符 + 字母</p>
+<p>同时，支持 连字符 + 双字母</p>
+<p>长选项： 双连字符 + 字母</p>
 <p>tough filename 创建新空白文件或更改已存在文件的时间戳为当下且不修改内容</p>
 <p>命令的最后一个参数对应的文件或目录不存在时，创建新文件或目录（取决于源是文件还是目录）并复制；存在时，覆写该文件或复制至目标目录</p>
 <p>当有多个源时，destination必须保证存在；</p>
@@ -155,10 +159,12 @@
 
 <p>只有一个源（一个文件或一个目录）时，destination不存在时会自动创建。</p>
 <p>只能对处于同一存储设备的文件创建硬链接。要想在位于不同存储设备的文件之间创建链接，只能使用符号链接。硬链接不支持链接目录</p>
+<p>tail 命令有一个非常酷的特性：-f 选项，该选项允许你在其他进程使用此文件时查看文件的内容。tail 命令会保持活动状态并持续地显示添加到文件中的内容。这是实时监测系统日志的绝佳方式</p>
+<p>展示文件详细内容的长列表中文件名尾部的星号 * 表明文件是一个可执行程序</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-04-08</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-04-11</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
