@@ -42,7 +42,7 @@
 <meta property="og:description" content="std::vector&lt;&gt;对比std::valarray&lt;&gt;std::vector是动态通用序列容器，支持快速随机访问和动态扩容，适用于通用数据存储；std::valarray是专为数值计算优化的数组类，不支持动态调整大小，但支持高效的切片、掩码操作和逐元素数学运算。二者区别在于用途、内存管理及数值计算能力。 核心区别对比： 功能定位： std::vector (STL):">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-08T09:03:20.000Z">
-<meta property="article:modified_time" content="2026-04-11T01:55:51.112Z">
+<meta property="article:modified_time" content="2026-04-21T08:05:37.756Z">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -192,6 +192,7 @@
 <p>需跨文件共享数据时，使用全局变量；需限制范围时使用static修饰以提高安全性</p>
 </blockquote>
 <p><strong>局部静态变量</strong>：用于需要累加或记录上一次函数调用状态的场景（如计数器），避免使用全局变量导致安全性问题。<br>**静态成员函数：**适用于操作工具性质的任务，如计算类对象创建数量、单例模式、日志记录等不需要依赖特定数据的场景</p>
+<p>静态成员函数不能直接访问非静态成员函数或非静态成员变量<br>因为静态成员属于类本身，在对象创建前就存在，不依赖特定对象，而没有 this 指针，无法访问具体对象的属性和方法</p>
 <h2 id="类成员访问权限的决定"><a href="#类成员访问权限的决定" class="headerlink" title="类成员访问权限的决定"></a>类成员访问权限的决定</h2><ul>
 <li>默认设定其访问权限为private,按需设定为public、protected</li>
 </ul>
@@ -221,13 +222,27 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-04-11</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-04-21</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2026/04/21/cpp-three-major-characteristics/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            Encap,i_Inherit_Polymor
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">
