@@ -44,7 +44,7 @@
 <meta property="og:description" content="线程可被视作轻量级的进程 同一进程中的所有线程共享地址空间，不同进程之间的内存共享通常难以实现，因为同一数据的内存地址在不同进程中不相同 硬件并行：多个处理单元同时执行多个任务并行强调使用硬件提高数据运算速度，并发强调任务分离或任务响应，二者均描述硬件同时执行多个任务的方式两种利用并发提升性能的方式：任务并行、数据并行 由于lambda的生命周期可能超出其调用者，故将lambda传递给其他线程时通">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-18T14:32:06.000Z">
-<meta property="article:modified_time" content="2026-04-15T12:57:26.455Z">
+<meta property="article:modified_time" content="2026-05-06T09:29:09.986Z">
 <meta property="article:tag" content="concurrency">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -164,10 +164,13 @@
 <p>线程的分离或汇入在对象销毁前决定，对象销毁和函数返回即线程结束无特定前后关系</p>
 <p>以下做法极不可取：意图在函数中创建线程，并让线程访问函数的局部变量身。除非线程肯定会在该函数退出前结束，否则切勿这么做。</p>
 <p>M&amp;M规则：<br>定义互斥锁类型的对象时，使用mutable修饰可实现在const成员函数中对互斥量上锁，实现逻辑上的对只读数据的安全修改，同时维持成员函数的const性质。</p>
+<p>std::scoped_lock是std::lock_guard更高级的封装，可用于规避死锁问题;两者性能开销无差异，故绑定单个互斥量时通常也使用std::scoped_lock</p>
+<p>std::unique_lock<a href="std::mutex">std::mutex</a> l{ m,std::adopt_lock };<br>只能绑定已被上锁的互斥量</p>
+<p>std::unique_lock<a href="std::mutex">std::mutex</a> l{ m,std::defer_lock };<br>绑定后续不一定需要上锁的互斥量<br>std::defer_lock 的目的仅仅是“关联但不占有”。你可以在之后根据逻辑需要决定是否加锁。如果不加锁就退出作用域，程序依然是安全的</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-04-15</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-05-06</p></div> 
     <div class="post-entry__tags"><a href="/tags/concurrency/" class="post-tags__link button"># concurrency</a></div> 
 </article>
 
