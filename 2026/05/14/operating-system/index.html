@@ -34,15 +34,15 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存">
+    <meta name="description" content="os : 虚拟化系统资源、管理分配系统资源 操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存 时分共享CPU微观层面上串行执行，宏观层面并行执行；设计初衷是避免一个进程彻底结束后再执行下一个（如批处理系统），因">
 <meta property="og:type" content="article">
 <meta property="og:title" content="operating_system">
 <meta property="og:url" content="http://example.com/2026/05/14/operating-system/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存">
+<meta property="og:description" content="os : 虚拟化系统资源、管理分配系统资源 操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存 时分共享CPU微观层面上串行执行，宏观层面并行执行；设计初衷是避免一个进程彻底结束后再执行下一个（如批处理系统），因">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-14T03:44:40.000Z">
-<meta property="article:modified_time" content="2026-05-14T03:45:41.566Z">
+<meta property="article:modified_time" content="2026-05-20T13:23:19.177Z">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -140,17 +140,33 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序<br>MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存</p>
+        <p>os : 虚拟化系统资源、管理分配系统资源</p>
+<p>操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序<br>MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存</p>
+<h2 id="时分共享CPU"><a href="#时分共享CPU" class="headerlink" title="时分共享CPU"></a>时分共享CPU</h2><p>微观层面上串行执行，宏观层面并行执行；设计初衷是避免一个进程彻底结束后再执行下一个（如批处理系统），因为切换时会</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-05-14</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-05-20</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2026/05/18/computer-architecture/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            computer_architecture
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">
