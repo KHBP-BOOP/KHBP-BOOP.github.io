@@ -25,8 +25,10 @@
     <!-- meta -->
 
 
-<title>computer_architecture | Hexo</title>
+<title>tools | Hexo</title>
 
+
+    <meta name="keywords" content="CMake">
 
 
 
@@ -34,15 +36,16 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="程序计数器 Program Counter : 追踪指令的地址 存储字长 数据总线宽度 主存储器：MDR 取决于存储字长&#x2F;数据总线宽度，通常32&#x2F;64位MAR 取决于存储单元数量，通常32&#x2F;64位">
+    <meta name="description" content="target_include_directories的三种scope：PUBLIC、PRIVATE、INTERFACE：使用PUBLIC方式添加目录，目标以及链接了该目标的其他目标，编译时均会在指定的目录下寻找头文件； 使用PRIVATE方式添加目录，只有目标编译时，才会在指定的目录下寻找头文件； 使用INTERFACE方式添加目录，只有链接了该目标的其他目标编译时，才会在指定的目录下寻找头文件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="computer_architecture">
-<meta property="og:url" content="http://example.com/2026/05/18/computer-architecture/index.html">
+<meta property="og:title" content="tools">
+<meta property="og:url" content="http://example.com/2026/05/25/tools/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="程序计数器 Program Counter : 追踪指令的地址 存储字长 数据总线宽度 主存储器：MDR 取决于存储字长&#x2F;数据总线宽度，通常32&#x2F;64位MAR 取决于存储单元数量，通常32&#x2F;64位">
+<meta property="og:description" content="target_include_directories的三种scope：PUBLIC、PRIVATE、INTERFACE：使用PUBLIC方式添加目录，目标以及链接了该目标的其他目标，编译时均会在指定的目录下寻找头文件； 使用PRIVATE方式添加目录，只有目标编译时，才会在指定的目录下寻找头文件； 使用INTERFACE方式添加目录，只有链接了该目标的其他目标编译时，才会在指定的目录下寻找头文件。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-18T07:36:35.000Z">
-<meta property="article:modified_time" content="2026-05-18T08:45:13.632Z">
+<meta property="article:published_time" content="2026-05-25T09:05:48.000Z">
+<meta property="article:modified_time" content="2026-05-25T09:17:27.093Z">
+<meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -118,10 +121,10 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        computer_architecture
+        tools
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2026/05/" class="post-meta__date button">2026-05-18</a>
+        <a href="/archives/2026/05/" class="post-meta__date button">2026-05-25</a>
         
  
         
@@ -140,44 +143,33 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>程序计数器 Program Counter : 追踪指令的地址</p>
-<p>存储字长 数据总线宽度</p>
-<p>主存储器：<br>MDR 取决于存储字长&#x2F;数据总线宽度，通常32&#x2F;64位<br>MAR 取决于存储单元数量，通常32&#x2F;64位</p>
+        <h2 id="target-include-directories的三种scope：PUBLIC、PRIVATE、INTERFACE："><a href="#target-include-directories的三种scope：PUBLIC、PRIVATE、INTERFACE：" class="headerlink" title="target_include_directories的三种scope：PUBLIC、PRIVATE、INTERFACE："></a>target_include_directories的三种scope：PUBLIC、PRIVATE、INTERFACE：</h2><p>使用PUBLIC方式添加目录，目标以及链接了该目标的其他目标，编译时均会在指定的目录下寻找头文件；</p>
+<p>使用PRIVATE方式添加目录，只有目标编译时，才会在指定的目录下寻找头文件；</p>
+<p>使用INTERFACE方式添加目录，只有链接了该目标的其他目标编译时，才会在指定的目录下寻找头文件。</p>
+<h2 id="target-link-libraries的三种scope：PUBLIC、PRIVATE、INTERFACE："><a href="#target-link-libraries的三种scope：PUBLIC、PRIVATE、INTERFACE：" class="headerlink" title="target_link_libraries的三种scope：PUBLIC、PRIVATE、INTERFACE："></a>target_link_libraries的三种scope：PUBLIC、PRIVATE、INTERFACE：</h2><p>使用PUBLIC方式链接库，编译目标时，目标以及链接了目标的其他目标均会与指定的库链接；</p>
+<p>使用PRIVATE方式链接库，编译目标时，只有目标会与指定的库链接；</p>
+<p>使用INTERFACE方式链接库，编译目标时，只有链接了目标的其他目标会与指定的库链接。</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-05-18</p></div> 
-    <div class="post-entry__tags"></div> 
+    <div class="post-footer__meta"><p>updated at 2026-05-25</p></div> 
+    <div class="post-entry__tags"><a href="/tags/CMake/" class="post-tags__link button"># CMake</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2026/05/25/tools/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            tools
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/2026/05/14/operating-system/" class="nav__link">
+                <a href="/2026/05/18/computer-architecture/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            operating_system
+                            computer_architecture
                         </div>
                     </div>
                     <div>
