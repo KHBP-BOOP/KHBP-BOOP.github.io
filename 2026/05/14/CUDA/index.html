@@ -45,7 +45,7 @@
 <meta property="og:image" content="http://example.com/images.png">
 <meta property="og:image" content="http://example.com/image.png">
 <meta property="article:published_time" content="2026-05-14T02:51:34.000Z">
-<meta property="article:modified_time" content="2026-06-05T13:11:20.274Z">
+<meta property="article:modified_time" content="2026-06-13T08:34:57.346Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image-1.png">
 
@@ -164,7 +164,7 @@
 <p>当应用程序启动内核时，它会使用许多线程，通常是数百万个线程</p>
 <p>一个线程块（Block）中的线程数量通常为32的倍数，最常见的大小为 128、256 或 512，最大1024<br>一个grid可能包含数百万个线程块，而执行该网格的GPU可能只有几十或几百个SM<br>CUDA 当前最多允许一个集群（Cluster）内有 8 个线程块</p>
 <p><img src="/image.png" alt="alt text"></p>
-<p>sm组成：<br>(Local)Shared Memory&#x2F;Distributed Shared Memory + L1 cache<br>寄存器文件<br>CUDA cores</p>
+<p>sm组成：<br>(Local)Shared Memory&#x2F;Distributed Shared Memory + L1 Data Cache<br>寄存器文件<br>CUDA core<br>Tensor core</p>
 <p>如果内核未使用共享内存，则整个物理空间将全部用于 L1 缓存</p>
 <pre><code>            CUDA runtime API
 </code></pre>
@@ -185,7 +185,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-06-05</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-06-13</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 

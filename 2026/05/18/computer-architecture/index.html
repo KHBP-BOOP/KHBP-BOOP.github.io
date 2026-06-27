@@ -34,16 +34,22 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="preExamine响应时间（执行时间、运行时间、挂钟时间）：完成某任务需要的总时间性能 &#x3D; 1 &#x2F; 执行时间CPU执行时间（CPU时间）  用户CPU时间   CPU性能                       系统CPU时间  系统性能吞吐率（带宽）：单位时间内完成的任务数量时钟周期数（时钟周期） CPI：指令平均时钟周期数MPI：每秒百万条指令数 指令寄存器 Inst">
+    <meta name="description" content="preExamine影响流水线的三个相关 RISC CISC ans: B D 若定点数补码的符号位和最高数值位不同，左移该数时会溢出 400H &#x3D;&#x3D;&#x3D; 1024800H &#x3D;&#x3D;&#x3D; 2048 RAM 和 ROM 都是采用随机存取的方式进行信息访问 响应时间（执行时间、运行时间、挂钟时间）：完成某任务需要的总时间性能 &#x3D; 1 &amp;#x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="computer_architecture">
 <meta property="og:url" content="http://example.com/2026/05/18/computer-architecture/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="preExamine响应时间（执行时间、运行时间、挂钟时间）：完成某任务需要的总时间性能 &#x3D; 1 &#x2F; 执行时间CPU执行时间（CPU时间）  用户CPU时间   CPU性能                       系统CPU时间  系统性能吞吐率（带宽）：单位时间内完成的任务数量时钟周期数（时钟周期） CPI：指令平均时钟周期数MPI：每秒百万条指令数 指令寄存器 Inst">
+<meta property="og:description" content="preExamine影响流水线的三个相关 RISC CISC ans: B D 若定点数补码的符号位和最高数值位不同，左移该数时会溢出 400H &#x3D;&#x3D;&#x3D; 1024800H &#x3D;&#x3D;&#x3D; 2048 RAM 和 ROM 都是采用随机存取的方式进行信息访问 响应时间（执行时间、运行时间、挂钟时间）：完成某任务需要的总时间性能 &#x3D; 1 &amp;#x">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image-5.png">
+<meta property="og:image" content="http://example.com/image-6.png">
+<meta property="og:image" content="http://example.com/image-2.png">
+<meta property="og:image" content="http://example.com/image-3.png">
+<meta property="og:image" content="http://example.com/image-4.png">
 <meta property="article:published_time" content="2026-05-18T07:36:35.000Z">
-<meta property="article:modified_time" content="2026-06-04T12:14:38.471Z">
+<meta property="article:modified_time" content="2026-06-14T13:08:26.500Z">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image-5.png">
 
 
 
@@ -140,16 +146,51 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="preExamine"><a href="#preExamine" class="headerlink" title="preExamine"></a>preExamine</h2><p>响应时间（执行时间、运行时间、挂钟时间）：完成某任务需要的总时间<br>性能 &#x3D; 1 &#x2F; 执行时间<br>CPU执行时间（CPU时间）  用户CPU时间   CPU性能<br>                       系统CPU时间  系统性能<br>吞吐率（带宽）：单位时间内完成的任务数量<br>时钟周期数（时钟周期）</p>
+        <h2 id="preExamine"><a href="#preExamine" class="headerlink" title="preExamine"></a>preExamine</h2><p>影响流水线的三个相关</p>
+<p>RISC CISC</p>
+<p><img src="/image-5.png" alt="alt text"><br>ans: B</p>
+<p><img src="/image-6.png" alt="alt text"><br>D</p>
+<p>若定点数补码的符号位和最高数值位不同，左移该数时会溢出</p>
+<p>400H &#x3D;&#x3D;&#x3D; 1024<br>800H &#x3D;&#x3D;&#x3D; 2048</p>
+<p>RAM 和 ROM 都是采用随机存取的方式进行信息访问</p>
+<p>响应时间（执行时间、运行时间、挂钟时间）：完成某任务需要的总时间<br>性能 &#x3D; 1 &#x2F; 执行时间<br>CPU执行时间（CPU时间）  用户CPU时间   CPU性能<br>                       系统CPU时间  系统性能<br>吞吐率（带宽）：单位时间内完成的任务数量<br>时钟周期数（时钟周期）：同步电路中完成一个最基本动作&#x2F;脉冲的时间<br>时钟频率：单位时间内（每秒）产生的时钟周期数</p>
+<p>机器周期<br>指令周期</p>
+<p>总线周期（Bus Cycle）是指 CPU 通过总线与存储器或 I&#x2F;O 接口进行一次数据传输（如读取或写入）所需要的时间单元</p>
+<p>中断周期：整个中断响应的时间</p>
 <p>CPI：指令平均时钟周期数<br>MPI：每秒百万条指令数</p>
 <p>指令寄存器 Instruction Register : 存放当前正在译码、执行的指令<br>程序计数器 Program Counter(或Instruction Pointer) : 追踪下一个指令的地址</p>
-<p>存储字长 数据总线宽度</p>
-<p>机器字长 计算机位数 CPU寄存器位数</p>
-<p>主存储器：<br>MDR 取决于存储字长&#x2F;数据总线宽度，通常32&#x2F;64位<br>MAR 取决于存储单元数量，通常32&#x2F;64位</p>
+<p>双、三、四总线结构</p>
+<p><img src="/image-2.png" alt="alt text"></p>
+<p><img src="/image-3.png" alt="alt text"></p>
+<p>存储字长</p>
+<p>机器字长：CPU进行一次定点整数运算所能处理的二进制数据位数<br>计算机位数：CPU片内数据总线宽度<br>CPU寄存器位数：CPU内部通用寄存器的宽度</p>
+<p>指令字长：一条指令包含的二进制位数<br>（一条指令包含的二进制位数）往往会设计成存储字长的整数倍</p>
+<p>数据字长：指数据存储或处理时所占用的实际位数（如单精度浮点数 (32) 位、双精度浮点数 (64) 位）</p>
+<h3 id="主存储器："><a href="#主存储器：" class="headerlink" title="主存储器："></a>主存储器：</h3><p>组成：<br>MDR 取决于存储字长&#x2F;数据总线宽度，通常32&#x2F;64位<br>MAR 取决于存储单元数量，通常32&#x2F;64位<br>……</p>
+<p>地址空间和存储容量：<br>存在虚拟化技术情况下，地址空间大小可以远大于存储容量大小。<br>MAR位数n满足： 2 ^ n &#x3D;&#x3D; 地址空间字节数大小</p>
+<p>寄存器存储器：多个寄存器（逻辑门）</p>
+<p>高速缓存存储器：SRAM</p>
+<p>主存储器：DRAM</p>
+<p>外存储器：</p>
+<p>直接存取存储器：磁盘（机械硬盘、软盘、光盘）<br>顺序存取存储器：磁带<br>随机存取存储器：SRAM DRAM</p>
+<p>闪存：<br>NAND flash<br>NOR flash</p>
+<p>存储时间          稳定、恢复存储器状态的时间<br>|&lt;————–&gt;|&lt;-&gt;|<br>|&lt;——————&gt;|<br>存储周期</p>
+<h3 id="4体交叉编址存储器"><a href="#4体交叉编址存储器" class="headerlink" title="4体交叉编址存储器"></a>4体交叉编址存储器</h3><p>通常指低位交叉，是将主存分为 4 个独立的模块<br>M0 0 4 8 …<br>M1 1 5 9 …<br>M2 …<br>M3 …</p>
+<p><strong>相同模块</strong>的地址被<strong>连续</strong>（相邻）访问，必然会引发严重的访存冲突</p>
+<p>地址映射表除了存储 12 位 Tag 以外，通常还需要 1 位有效位（Valid bit） 来标识该块数据是否有效</p>
+<h2 id="数据交换的单位"><a href="#数据交换的单位" class="headerlink" title="数据交换的单位"></a>数据交换的单位</h2><p>Cache 与主存之间：以数据块（或称字块、Cache Line）为单位进行数据交换，典型大小为 (64) 字节。利用空间局部性原理，一次调入一片连续数据。</p>
+<p>主存与辅存之间：以页（Page）或段为单位进行数据交换（实现虚拟存储器功能），典型大小为 (4) KB。</p>
+<p>CPU 与 Cache 之间：以字（Word）或字节为单位进行数据交换</p>
+<p><img src="/image-4.png" alt="alt text"></p>
+<h2 id="程序中断法"><a href="#程序中断法" class="headerlink" title="程序中断法"></a>程序中断法</h2><p>向PC存入中断服务程序入口地址的方法————硬件向量法：</p>
+<p>中断向量表<br>中断类型号 –》 中断服务程序入口地址<br>中断向量地址 –》 中断向量</p>
+<p>CPU响应中断时会保存断点（PC）和当前程序状态（PSW）</p>
+<h2 id="操作数寻址方式"><a href="#操作数寻址方式" class="headerlink" title="操作数寻址方式"></a>操作数寻址方式</h2><p>立即寻址一般用于变量赋初值。</p>
+<p>寄存器寻址也是计算机中最常用的寻址方式，但由于 CPU 中寄存器数量有限，因此这种寻址方式不能为操作数提供大量的存储空间</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-06-04</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-06-14</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
