@@ -34,16 +34,19 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地修改张量（即数据量较大时）X +&#x3D; Y   或   X[ : ] &#x3D; X + Y会重新分配内存的情况X &#x3D; X+Y 广播机制中，对于两个张量，维度个数必须相同，同一维度下的元素个数可以不同 r">
+    <meta name="description" content="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地修改张量（即数据量较大时）X +&#x3D; Y   或   X[ : ] &#x3D; X + Y会重新分配内存的情况X &#x3D; X+">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deep_learning">
 <meta property="og:url" content="http://example.com/2026/06/01/deep-learning/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地修改张量（即数据量较大时）X +&#x3D; Y   或   X[ : ] &#x3D; X + Y会重新分配内存的情况X &#x3D; X+Y 广播机制中，对于两个张量，维度个数必须相同，同一维度下的元素个数可以不同 r">
+<meta property="og:description" content="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地修改张量（即数据量较大时）X +&#x3D; Y   或   X[ : ] &#x3D; X + Y会重新分配内存的情况X &#x3D; X+">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image-6.png">
+<meta property="og:image" content="http://example.com/image-5.png">
 <meta property="article:published_time" content="2026-06-01T07:54:18.000Z">
-<meta property="article:modified_time" content="2026-06-27T10:00:15.454Z">
+<meta property="article:modified_time" content="2026-07-05T05:14:29.471Z">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image-6.png">
 
 
 
@@ -140,7 +143,7 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>监督学习算法：</p>
+        <h3 id="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题"><a href="#从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题" class="headerlink" title="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题"></a><em>从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题</em></h3><p>监督学习算法：</p>
 <ul>
 <li>回归算法：无限多个可能输出中预测下一个输出</li>
 <li>分类算法：有限多个可能输出中预测下一个输出</li>
@@ -157,14 +160,36 @@
 <p>标量对向量求导的结果就是梯度</p>
 <p>机器学习的自动求导的方法：反向传播 前向传播</p>
 <p>卷积层是隐藏层的一种，专门用于提取图像等网格状数据局部特征</p>
-<h2 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h2><p>文字 –tokenization–》<br>tokens –Numericalization–》   （tokenization与Numericalization通常被tokenizer封装在一个函数中）<br>tokens ID –word embedding–》<br>embedding vectors –Positional Encoding Addition(add to position vectors)–》<br>input embeddings</p>
+<p><img src="/image-6.png" alt="alt text"></p>
+<p>D<strong>v</strong>f(x) 函数f在点x处，与向量<strong>v</strong>同方向的方向导数</p>
+<p><img src="/image-5.png" alt="alt text"></p>
+<p>多元函数某点上的梯度向量：</p>
+<p>梯度的方向 - 指向多元函数在某点的函数值增长最快的方向</p>
+<p>梯度的模 - 等于该点的最大方向导数，等于该点的最大变化率</p>
+<p>一元实值函数的导函数 - 标量值函数<br>一元向量值函数的导函数 - 向量值函数</p>
+<p>多元实值函数的导函数 - 向量值函数<br>多元向量值函数的导函数 - 矩阵值函数</p>
+<p>函数 f: Rn -&gt; Rm</p>
+<p>n &#x3D; 1 m &#x3D; 1, 导函数为标量</p>
+<p> K、V来自encoder前向传播结束后的KV cache？</p>
+<h2 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h2><p>文字 –tokenization–》<br>tokens –Numericalization–》   （tokenization与Numericalization通常被tokenizer封装在一个函数中）<br>tokens ID –word embedding–》<br>embedding vectors –Positional Encoding(add to position vectors)–》<br>input embeddings</p>
 <p>word embedding层的可学习查找矩阵有时会和输出层的 LM Head 共享权重（称为 <strong>Weight Tying</strong>），这样可以节省 V×d_model 的显存。</p>
-<h4 id="注意力头"><a href="#注意力头" class="headerlink" title="注意力头"></a>注意力头</h4><p>一个注意力头（Head）是由 Q, K, V 矩阵中特定的一组列向量组合构成的，它包含了所有 Token 在该子空间下的投影，相当于不同的滤镜或观察视角。</p>
+<p>缩放点积注意力是具体的计算公式，是多头注意力的核心计算单元。<br>多头注意力是对缩放点积注意力的结构化拓展，它通过并行多个不同的线性投影空间来捕捉多角度的语义<br>Multi-Head attention的三种应用：<br>Encoder Self-Attention<br>causal masked Decoder Self-Attention<br>Decoder-encoder cross-Attention</p>
+<p>借助WQ、WK、WV可学习权重矩阵通过线性投影得到Q、K、V<br>S &#x3D; Q @ KT 得到原始注意力分数矩阵<br>缩放scale<br>以行为单位执行softmax，得到注意力权重矩阵A<br>Output &#x3D; A @ V</p>
+<p>都表示语义</p>
+<p>encoder：输入源序列，无因果掩码但包含用于忽略填充位 <pad> 的 Padding 掩码，充分理解各token深层语义。</p>
+<p>decoder：输入目标序列，存在因果掩码机制。各token的各层语义根据自身及其左侧上下文得出，并且融合了encoder最终输出的完整上下文</p>
+<p>每一层decoder的输出都包含任一token的多种语义且丰富程度且不断变深</p>
+<p>输入源序列，无因果掩码（但包含用于忽略填充位 <pad> 的 Padding 掩码）。采用双向自注意力机制（Bidirectional Self-Attention），使得各层 token 能够同时捕获左右双向的上下文信息，从而充分理解各 token 的深层语义</p>
+<p>输入目标序列，在自注意力层（Self-Attention）引入了因果掩码机制（Causal Mask）。这确保了在训练阶段，目标序列中各 token 在当前层的表征仅能结合自身及左侧已生成的上下文信息，从而防止未来信息泄露（Data Leakage）。随后，Decoder 通过交叉注意力机制（Cross-Attention &#x2F; Encoder-Decoder Attention），将自身的中间表征（作为 Query）与 Encoder 最终输出的完整上下文表征（作为 Key 和 Value）进行动态融合，从而实现基于源语言上下文的目标语言生成</p>
+<p>交叉注意力，注意力的计算源来自两个地方，即融合encoder输出以及decoder掩码结果；</p>
+<p>自注意力，注意力的计算源来自一个地方，即输入自身的序列。</p>
+<p>原始transformer架构 推理过程 第一个输出token基于输入序列，之后的token基于输入序列以及生成的序列？ 训练过程 输入源序列、目标序列，输出包含“每个位置可能的token概率”的矩阵？</p>
+<h3 id="注意力头"><a href="#注意力头" class="headerlink" title="注意力头"></a>注意力头</h3><p>一个注意力头（Head）是由 Q, K, V 矩阵中特定的一组列向量组合构成的，它包含了所有 Token 在该子空间下的投影，相当于不同的滤镜或观察视角。</p>
 <p>每个注意力头不需要看完整的 512 维特征，只需要看分给它的 64 维特征，并在该低维子空间内独立计算一套注意力权重。最后，所有头的观察结果（列）再拼接（Concat）起来，恢复成完整的 512 维向量。</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-06-27</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-07-05</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
