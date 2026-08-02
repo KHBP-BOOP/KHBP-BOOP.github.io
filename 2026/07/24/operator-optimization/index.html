@@ -25,7 +25,7 @@
     <!-- meta -->
 
 
-<title>operating_system | Hexo</title>
+<title>operator_optimization | Hexo</title>
 
 
 
@@ -34,15 +34,15 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="os : 虚拟化系统资源、管理分配系统资源 操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存 时分共享CPU微观层面上串行执行，宏观层面并行执行；设计初衷是避免一个进程彻底结束后再执行下一个（如批处理系统），因">
+    <meta name="description" content="“HPC is all about reducing data movement”.Roofline计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$ 计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$ 计算强度上限 - $\pi$ &#x2F; $\beta$ 自变量$I$ ： 程序计算强度。计算公式： 单个样本在程序中发生的浮点运算总数 &#x2F; 单个样本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="operating_system">
-<meta property="og:url" content="http://example.com/2026/05/14/operating-system/index.html">
+<meta property="og:title" content="operator_optimization">
+<meta property="og:url" content="http://example.com/2026/07/24/operator-optimization/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="os : 虚拟化系统资源、管理分配系统资源 操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存 时分共享CPU微观层面上串行执行，宏观层面并行执行；设计初衷是避免一个进程彻底结束后再执行下一个（如批处理系统），因">
+<meta property="og:description" content="“HPC is all about reducing data movement”.Roofline计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$ 计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$ 计算强度上限 - $\pi$ &#x2F; $\beta$ 自变量$I$ ： 程序计算强度。计算公式： 单个样本在程序中发生的浮点运算总数 &#x2F; 单个样本">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-14T03:44:40.000Z">
-<meta property="article:modified_time" content="2026-05-20T13:23:19.177Z">
+<meta property="article:published_time" content="2026-07-24T01:58:07.000Z">
+<meta property="article:modified_time" content="2026-07-24T01:58:37.082Z">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -118,10 +118,10 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        operating_system
+        operator_optimization
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2026/05/" class="post-meta__date button">2026-05-14</a>
+        <a href="/archives/2026/07/" class="post-meta__date button">2026-07-24</a>
         
  
         
@@ -140,13 +140,20 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>os : 虚拟化系统资源、管理分配系统资源</p>
-<p>操作系统只把当前用到的虚拟内存换入真实的物理内存，用不到的暂时存在硬盘的交换区（Swap）中。4GB 的物理内存因此可以运行总计需要 10GB 内存的多个程序<br>MMU（内存管理单元）可以将散落在各处的物理内存页，映射为程序眼中连续的虚拟内存</p>
-<h2 id="时分共享CPU"><a href="#时分共享CPU" class="headerlink" title="时分共享CPU"></a>时分共享CPU</h2><p>微观层面上串行执行，宏观层面并行执行；设计初衷是避免一个进程彻底结束后再执行下一个（如批处理系统），因为切换时会</p>
+        <h3 id="“HPC-is-all-about-reducing-data-movement”"><a href="#“HPC-is-all-about-reducing-data-movement”" class="headerlink" title="“HPC is all about reducing data movement”."></a><em>“HPC is all about reducing data movement”.</em></h3><h2 id="Roofline"><a href="#Roofline" class="headerlink" title="Roofline"></a>Roofline</h2><p>计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$</p>
+<p>计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$</p>
+<p>计算强度上限 - $\pi$ &#x2F; $\beta$</p>
+<p>自变量$I$ ： 程序计算强度。<br>计算公式：</p>
+<p>单个样本在程序中发生的浮点运算总数 &#x2F;</p>
+<p>单个样本在程序中需进行的内存交换总量</p>
+<p>因变量$P$ ： 程序在计算平台上的每秒浮点运算次数，程序的理论性能值。</p>
+<p>$$<br>P &#x3D; \begin{cases}<br>\beta \cdot I, &amp; \text{when } I &lt; I_{\max} \quad \color{red}\text{Memory Bound} \<br>\pi, &amp; \text{when } I \geqslant I_{\max} \quad \color{green}\text{Compute Bound}<br>\end{cases}<br>$$</p>
+<h2 id="Tiling"><a href="#Tiling" class="headerlink" title="Tiling"></a>Tiling</h2><p>Tiling（分块） 优化的核心标志是使用 共享内存（<strong>shared</strong> memory）。</p>
+<p>它的主要目的是为了数据复用。如果一个数据被加载后，不仅当前线程要用，隔壁线程也要用（比如矩阵乘法、图像卷积、算滑动平均），我们就会把这一块数据先“搬”到片上的共享内存里缓存起来，避免大家反复去排队读取慢速的全局内存</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-05-20</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-07-24</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
@@ -154,7 +161,7 @@
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2026/05/18/computer-architecture/" class="nav__link">
+                <a href="/2026/07/29/performance-analysis/" class="nav__link">
                     <div>
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
                     </div>
@@ -163,7 +170,7 @@
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            computer_architecture
+                            performance_analysis
                         </div>
                     </div>
                 </a>
@@ -171,13 +178,13 @@
         </div>
         <div class="nav__next">
             
-                <a href="/2026/05/14/CUDAMemory/" class="nav__link">
+                <a href="/2026/07/23/CUDAProgramming/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            CUDA
+                            CUDAProgramming
                         </div>
                     </div>
                     <div>

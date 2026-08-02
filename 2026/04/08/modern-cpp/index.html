@@ -34,15 +34,15 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="std::bind_frontc++20引入： std::ref()应用于泛型模板编程，若用于常规非模板函数通常编译失败 常被以下模板函数用于传参：std::thread std::asyncstd::bind()std::for_each() std::invoke() 复制消除c++17后成为语言标准强制要求主要针对纯右值、类型与返回类型相同的局部变量 RVO和NRVO是实现复制消除这一编译器">
+    <meta name="description" content="ranges库优化容器内数据处理 ranges库定义在std命名空间 std::views是std::ranges::views的别名 views本质上是一个多层嵌套的模板结构体，包括封装的原容器指针、具体管道操作对应的函数对象、根据管道操作自定义的迭代器。 定义视图，编译期时通过类型推导，产出一个嵌套模板类型；运行期时实例化该嵌套模板结构体。 访问视图，借助自定义迭代器，过滤出符合期望的数据 伪">
 <meta property="og:type" content="article">
 <meta property="og:title" content="modern_cpp">
 <meta property="og:url" content="http://example.com/2026/04/08/modern-cpp/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="std::bind_frontc++20引入： std::ref()应用于泛型模板编程，若用于常规非模板函数通常编译失败 常被以下模板函数用于传参：std::thread std::asyncstd::bind()std::for_each() std::invoke() 复制消除c++17后成为语言标准强制要求主要针对纯右值、类型与返回类型相同的局部变量 RVO和NRVO是实现复制消除这一编译器">
+<meta property="og:description" content="ranges库优化容器内数据处理 ranges库定义在std命名空间 std::views是std::ranges::views的别名 views本质上是一个多层嵌套的模板结构体，包括封装的原容器指针、具体管道操作对应的函数对象、根据管道操作自定义的迭代器。 定义视图，编译期时通过类型推导，产出一个嵌套模板类型；运行期时实例化该嵌套模板结构体。 访问视图，借助自定义迭代器，过滤出符合期望的数据 伪">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-08T08:59:21.000Z">
-<meta property="article:modified_time" content="2026-05-16T12:24:50.914Z">
+<meta property="article:modified_time" content="2026-07-20T08:59:46.982Z">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -140,7 +140,18 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="std-bind-front"><a href="#std-bind-front" class="headerlink" title="std::bind_front"></a>std::bind_front</h2><p>c++20引入：</p>
+        <h2 id="ranges库"><a href="#ranges库" class="headerlink" title="ranges库"></a>ranges库</h2><p>优化容器内数据处理</p>
+<p>ranges库定义在std命名空间</p>
+<p>std::views是std::ranges::views的别名</p>
+<p>views本质上是一个多层嵌套的模板结构体，包括封装的原容器指针、具体管道操作对应的函数对象、根据管道操作自定义的迭代器。</p>
+<p>定义视图，编译期时通过类型推导，产出一个嵌套模板类型；运行期时实例化该嵌套模板结构体。</p>
+<p>访问视图，借助自定义迭代器，过滤出符合期望的数据</p>
+<p>伪代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> std &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">namespace</span> ranges &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="keyword">namespace</span> views &#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">namespace</span> views = ranges::views;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>惰性求值，故定义时不放入内存</p>
+<p>投影</p>
+<h2 id="std-bind-front"><a href="#std-bind-front" class="headerlink" title="std::bind_front"></a>std::bind_front</h2><p>c++20引入：</p>
 <h2 id="std-ref"><a href="#std-ref" class="headerlink" title="std::ref()"></a>std::ref()</h2><p>应用于泛型模板编程，若用于常规非模板函数通常编译失败</p>
 <p>常被以下模板函数用于传参：<br>std::thread std::async<br>std::bind()<br>std::for_each() std::invoke()</p>
 <h2 id="复制消除"><a href="#复制消除" class="headerlink" title="复制消除"></a>复制消除</h2><p>c++17后成为语言标准强制要求<br>主要针对纯右值、类型与返回类型相同的局部变量</p>
@@ -159,7 +170,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-05-16</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-07-20</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
