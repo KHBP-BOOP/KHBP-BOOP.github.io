@@ -45,7 +45,7 @@
 <meta property="og:image" content="http://example.com/image-1.png">
 <meta property="og:image" content="http://example.com/image.png">
 <meta property="article:published_time" content="2026-05-14T02:51:34.000Z">
-<meta property="article:modified_time" content="2026-08-02T09:08:02.500Z">
+<meta property="article:modified_time" content="2026-08-03T10:24:24.076Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images.png">
 
@@ -199,6 +199,8 @@
 <li><p>数据从SMEM写回全局内存<br><em>一个寄存器对SMEM的一次load 从寄存器到全局内存的一次store</em><br><em>LDS STG</em></p>
 </li>
 </ol>
+<h1 id="Memory-Transaction-拆分机制："><a href="#Memory-Transaction-拆分机制：" class="headerlink" title="Memory Transaction 拆分机制："></a>Memory Transaction 拆分机制：</h1><p>float 访存（32 bit&#x2F;线程）：一个 warp 访问 128 bytes，恰好一个 memory transaction<br>float2 访存（64 bit&#x2F;线程）：一个 warp 访问 256 bytes，拆分为 2 个 memory transaction，每组 16 个线程（half-warp）<br>float4 访存（128 bit&#x2F;线程）：一个 warp 访问 512 bytes，拆分为 4 个 memory transaction，每组 8 个线程（quarter-warp）</p>
+<p>线程访问SMEM如何确定将要执行的内存事务的数量：先确定线程访问SMEM的方式（float、float2、float4），接着乘以32得到一个warp要访问的字节数，最后查看硬件拆分的内存事务数目（不是固定值）。</p>
 <p>线程块中：</p>
 <p>不同warp内线程间的通信和同步：片上共享内存 on-chip shared memory  由__syncthreads()内部函数实现，该函数会阻塞线程块内的所有线程，直到所有线程都执行到该函数。</p>
 <p>同一warp内线程间通信与同步：寄存器 shuffle原语</p>
@@ -243,7 +245,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-08-02</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-08-03</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
