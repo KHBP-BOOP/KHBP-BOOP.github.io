@@ -34,18 +34,18 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="硬件概念模型GPU可被视为SM的集合，SM成组地被组织为图形处理集群（GPC） 逻辑内存模型Global Memory位于GPU外部HBM芯片上 访问效率由：合并访问 coalescingmemory transaction数量决定。 合并访问:核心原则：让 Warp 内的连续线程访问连续的内存地址。   GPU 以 32B&#x2F;64B&#x2F;128B 的粒度从全局内存取数据（一次”事务">
+    <meta name="description" content="参考资料https:&#x2F;&#x2F;docs.nvidia.com&#x2F;cuda&#x2F;archive&#x2F;11.6.2&#x2F;cuda-c-programming-guide&#x2F;index.html#global-memory-3-0https:&#x2F;&#x2F;docs.nvidia.com&#x2F;cuda&#x2F;archive&#x2F;9.1&#x2F;cuda-c-best-practices-guide&#x2F;#abstract#4https:&#x2F;&#x2F;developer.n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CUDA">
 <meta property="og:url" content="http://example.com/2026/05/14/CUDAMemory/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="硬件概念模型GPU可被视为SM的集合，SM成组地被组织为图形处理集群（GPC） 逻辑内存模型Global Memory位于GPU外部HBM芯片上 访问效率由：合并访问 coalescingmemory transaction数量决定。 合并访问:核心原则：让 Warp 内的连续线程访问连续的内存地址。   GPU 以 32B&#x2F;64B&#x2F;128B 的粒度从全局内存取数据（一次”事务">
+<meta property="og:description" content="参考资料https:&#x2F;&#x2F;docs.nvidia.com&#x2F;cuda&#x2F;archive&#x2F;11.6.2&#x2F;cuda-c-programming-guide&#x2F;index.html#global-memory-3-0https:&#x2F;&#x2F;docs.nvidia.com&#x2F;cuda&#x2F;archive&#x2F;9.1&#x2F;cuda-c-best-practices-guide&#x2F;#abstract#4https:&#x2F;&#x2F;developer.n">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images.png">
 <meta property="og:image" content="http://example.com/image-1.png">
 <meta property="og:image" content="http://example.com/image.png">
 <meta property="article:published_time" content="2026-05-14T02:51:34.000Z">
-<meta property="article:modified_time" content="2026-08-05T11:02:34.414Z">
+<meta property="article:modified_time" content="2026-08-18T04:45:16.111Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images.png">
 
@@ -144,7 +144,13 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h1 id="硬件概念模型"><a href="#硬件概念模型" class="headerlink" title="硬件概念模型"></a>硬件概念模型</h1><p>GPU可被视为SM的集合，SM成组地被组织为图形处理集群（GPC）</p>
+        <p><em>参考资料</em><br><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/archive/11.6.2/cuda-c-programming-guide/index.html#global-memory-3-0">https://docs.nvidia.com/cuda/archive/11.6.2/cuda-c-programming-guide/index.html#global-memory-3-0</a><br><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/archive/9.1/cuda-c-best-practices-guide/#abstract#4">https://docs.nvidia.com/cuda/archive/9.1/cuda-c-best-practices-guide/#abstract#4</a><br><a target="_blank" rel="noopener" href="https://developer.nvidia.cn/blog/cuda-performance-guide-cn/">https://developer.nvidia.cn/blog/cuda-performance-guide-cn/</a>  </p>
+<h1 id="硬件概念模型"><a href="#硬件概念模型" class="headerlink" title="硬件概念模型"></a>硬件概念模型</h1><p>GPU Video RAM （GPU显存）</p>
+<ol>
+<li>GDDR系列 消费级</li>
+<li>HBM系列         硅中介层 - 位宽    3D堆叠 - 存储容量    TSV硅通孔 - 通信</li>
+</ol>
+<p>GPU可被视为SM的集合，SM成组地被组织为图形处理集群（GPC）</p>
 <h1 id="逻辑内存模型"><a href="#逻辑内存模型" class="headerlink" title="逻辑内存模型"></a>逻辑内存模型</h1><h2 id="Global-Memory"><a href="#Global-Memory" class="headerlink" title="Global Memory"></a>Global Memory</h2><p>位于GPU外部HBM芯片上</p>
 <p>访问效率由：<br>合并访问 coalescing<br>memory transaction数量<br>决定。</p>
 <h4 id="合并访问"><a href="#合并访问" class="headerlink" title="合并访问:"></a>合并访问:</h4><p>核心原则：让 Warp 内的连续线程访问连续的内存地址。  </p>
@@ -152,6 +158,7 @@
 <h2 id="L1-L2-cache"><a href="#L1-L2-cache" class="headerlink" title="L1&#x2F;L2 cache"></a>L1&#x2F;L2 cache</h2><p>物理内存模型：一维紧密排列。内存不在意Cache Line，只按字节顺序输出。</p>
 <p>逻辑内存模型（CUDA编程视角）：依然是一维线性空间（全局内存地址连续），绝非二维数组。</p>
 <p>Cache硬件结构：类似于二维数组（行&#x3D;Cache Line索引，列&#x3D;Sector编号）。硬件负责将内存中一维连续（或分散）的数据，映射并填充到这个二维的缓存结构中。</p>
+<p>访问GMEM时，配置为不经过L1 cache：<br>内存事务的粒度、缓存行字节数大小变为32B，对于相对scattered的访问场景，可减少过度读取over-fetch，防止带宽利用率过低<br>配置为经过L1 cache：<br>内存事务的粒度、缓存行字节数大小变为128B，对于合并访问相对良好的访问场景，可显著提升带宽<br>同时，可根据kernel对SMEM的依赖程度，配置L1 cache是否参与数据传输，以此平衡SMEM与L1 cache对每SM上SRAM芯片的占用</p>
 <h2 id="Shared-Local-Memory"><a href="#Shared-Local-Memory" class="headerlink" title="Shared Local Memory"></a>Shared Local Memory</h2><p>位于SM芯片上</p>
 <details>
 <summary> <h3 style="display:inline;"> MIO throttle stall </h3> </summary>
@@ -250,7 +257,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-08-05</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-08-18</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
