@@ -34,17 +34,17 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地修改张量（即数据量较大时）X +&#x3D; Y   或   X[ : ] &#x3D; X + Y会重新分配内存的情况X &#x3D; X+">
+    <meta name="description" content="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  大模型在数学上可以抽象为将输入序列映射到输出概率分布的高维复合函数，并通过神经网络结合自回归采样的方式，对这一复杂映射进行了统计逼近与实现。 pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地">
 <meta property="og:type" content="article">
 <meta property="og:title" content="deep_learning">
 <meta property="og:url" content="http://example.com/2026/06/01/deep-learning/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地修改张量（即数据量较大时）X +&#x3D; Y   或   X[ : ] &#x3D; X + Y会重新分配内存的情况X &#x3D; X+">
+<meta property="og:description" content="从数学视角看，神经网络的训练本质就是在求解一个以全部权重和偏置为自变量的极值问题监督学习算法：  回归算法：无限多个可能输出中预测下一个输出 分类算法：有限多个可能输出中预测下一个输出  大模型在数学上可以抽象为将输入序列映射到输出概率分布的高维复合函数，并通过神经网络结合自回归采样的方式，对这一复杂映射进行了统计逼近与实现。 pytorch中函数名以_做结尾的，通常表示该函数会原地进行操作 原地">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/image-6.png">
 <meta property="og:image" content="http://example.com/image-5.png">
 <meta property="article:published_time" content="2026-06-01T07:54:18.000Z">
-<meta property="article:modified_time" content="2026-07-05T08:47:52.864Z">
+<meta property="article:modified_time" content="2026-08-26T09:49:17.621Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image-6.png">
 
@@ -148,12 +148,23 @@
 <li>回归算法：无限多个可能输出中预测下一个输出</li>
 <li>分类算法：有限多个可能输出中预测下一个输出</li>
 </ul>
+<p>大模型在数学上可以抽象为将输入序列映射到输出概率分布的高维复合函数，并通过神经网络结合自回归采样的方式，对这一复杂映射进行了统计逼近与实现。</p>
 <p>pytorch中函数名以<code>_</code>做结尾的，通常表示该函数会原地进行操作</p>
 <p>原地修改张量（即数据量较大时）<br>X +&#x3D; Y   或   X[ : ] &#x3D; X + Y<br>会重新分配内存的情况<br>X &#x3D; X+Y</p>
-<p>广播机制中，对于两个张量，维度个数必须相同，同一维度下的元素个数可以不同</p>
-<p>reshape() view() transpose()<br>不会在原变量上修改，需创建一个新变量接收其返回值</p>
+<h2 id="tensor-数据操作"><a href="#tensor-数据操作" class="headerlink" title="tensor 数据操作"></a>tensor 数据操作</h2><p>广播机制中，对于两个张量，维度个数必须相同，同一维度下的元素个数可以不同</p>
+<p>dim&#x3D;0 指张量最外层的维度、dim&#x3D;1 指张量第二外层的维度，以此类推</p>
+<p>torch.tensor对象.sum(dim&#x3D; )<br>将<strong>指定维度对应的括号</strong>内的所有张量按元素相加</p>
+<p>torch.cat()<br>连接张量，不增加维度<br>取被操作张量最大维度数为DIM（以0为起始），则dim取值[-(DIM+1), DIM]<br>torch.stack()<br>堆叠张量，增加一个维度<br>取被操作张量最大维度数为DIM（以0为起始），则dim取值[-(DIM+2), DIM+1]</p>
+<p>torch.tensor对象.reshape(-1) 或 torch.tensor对象.view(-1)<br>创建形状为一维的张量</p>
+<p>view()：<br>若张量在内存中连续存储（即is_contiguous()为true），则改变张量的元信息（形状和步长），返回该张量的一个视图，同时用一个新的标识符对应该视图。这两个对象指向同一块内存空间<br>若张量在内存中不是连续存储（例如执行了 transpose()、permute() 或 narrow() 之后），直接抛出RuntimeError  </p>
+<p>reshape()：对连续性没有要求。它会先检查张量是否连续<br>如果连续，行为等价于 view()（共享数据）<br>如果不连续，先申请一块新的连续内存，将原始数据拷贝过去，然后再返回这个具有新的元信息的张量的视图</p>
 <p>numpy   darray 是 计算机概念<br>pytorch&#x2F;tensorflow   tensor 是 数学概念</p>
-<p>torch.tensor对象<br>.numel() 方法，等同于NumPy中的 .size 属性（返回数组元素个数）<br>.size() 方法，返回tensor.size类型（tuple的派生类型）的对象，通过 <code>.size(轴数)</code> 的方式获得特定轴上的维数<br>.shape 属性，返回tensor.size类型（tuple的派生类型）的对象，通过 <code>.shape[轴数]</code> 的方式获得特定轴上的维数</p>
+<p>torch.tensor对象<br>.numel() 方法，等同于NumPy中的 .size 属性（返回数组元素个数）<br>.size() 方法，返回tensor.size类型（tuple的派生类型）的对象，通过 <code>.size(轴数)</code> 的方式获得特定轴上的维数<br>.shape 属性，返回tensor.size类型（tuple的派生类型）的对象，通过 <code>.shape[轴数]</code> 的方式获得特定轴上的维数，与.size()等价</p>
+<h2 id="前向传播、反向传播和计算图"><a href="#前向传播、反向传播和计算图" class="headerlink" title="前向传播、反向传播和计算图"></a>前向传播、反向传播和计算图</h2><p>可以调整但不在训练过程中更新的参数称为超参数（hyperparameter）。 调参（hyperparameter tuning）是选择超参数的过程。 超参数通常是我们根据训练迭代结果来调整的， 而训练迭代结果是在独立的验证数据集（validation dataset）上评估得到的</p>
+<p>中间激活值（A）：是非线性空间的映射。它引入了非线性（如将负值置零、压缩到 0~1 之间），正是这个值赋予了神经网络“拟合任意函数”的能力</p>
+<p>反向传播重复利用前向传播中存储的中间值，以避免重复计算。 带来的影响之一是我们需要保留中间值，直到反向传播完成。 这也是训练比单纯的预测需要更多的内存（显存）的原因之一</p>
+<p>这些中间值的大小与网络层的数量和批量的大小大致成正比。 因此，使用更大的批量来训练更深层次的网络更容易导致内存不足（out of memory）错误</p>
+<p>前向传播，按照计算目标函数值的依赖路径，计算出每个中间值，它们中的部分中间激活值保存在内存中；反向传播，按照相反方向，根据上一次前向传播的中间值结果，先沿计算图传播梯度，再得到目标函数对每个模型参数的导数，通过优化算法沿着梯度的反方向调整参数，从而使得目标函数值整体趋于降低，最终完成一次参数更新</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], dtype=torch.float32)</span><br><span class="line">y = torch.arange(<span class="number">6</span>, dtype=torch.float32).reshape(<span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment">#L1范数、L2范数</span></span><br><span class="line">L1_x = torch.linalg.norm(x)</span><br><span class="line">L2_x = torch.<span class="built_in">abs</span>(x).<span class="built_in">sum</span>()</span><br><span class="line"><span class="built_in">print</span>(L1_x, L2_x)</span><br><span class="line"><span class="comment">#Frobenius范数 类似于向量的L2范数</span></span><br><span class="line">Fro_y = torch.linalg.norm(y)</span><br><span class="line"><span class="built_in">print</span>(Fro_y)</span><br></pre></td></tr></table></figure>
 
 <p>默认情况下，<code>某张量变量.grad</code>  的值会累加，一般需调用 <code>.grad.zero_()</code> 清除之前的值</p>
@@ -194,7 +205,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-07-05</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-08-26</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
