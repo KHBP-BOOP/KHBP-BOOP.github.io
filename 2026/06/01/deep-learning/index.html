@@ -44,7 +44,7 @@
 <meta property="og:image" content="http://example.com/image-6.png">
 <meta property="og:image" content="http://example.com/image-5.png">
 <meta property="article:published_time" content="2026-06-01T07:54:18.000Z">
-<meta property="article:modified_time" content="2026-08-26T09:49:17.621Z">
+<meta property="article:modified_time" content="2026-08-27T01:50:23.625Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image-6.png">
 
@@ -202,10 +202,26 @@
 <p>原始transformer架构<br>推理过程 第一个输出token基于输入序列，之后的token基于输入序列以及生成的序列<br>训练过程 输入源序列、目标序列，输出包含“每个位置可能的token概率”的矩阵</p>
 <h3 id="注意力头"><a href="#注意力头" class="headerlink" title="注意力头"></a>注意力头</h3><p>一个注意力头（Head）是由 Q, K, V 矩阵中特定的一组列向量组合构成的，它包含了所有 Token 在该子空间下的投影，相当于不同的滤镜或观察视角。</p>
 <p>每个注意力头不需要看完整的 512 维特征，只需要看分给它的 64 维特征，并在该低维子空间内独立计算一套注意力权重。最后，所有头的观察结果（列）再拼接（Concat）起来，恢复成完整的 512 维向量。</p>
+<h3 id="Token-采样策略"><a href="#Token-采样策略" class="headerlink" title="Token 采样策略"></a>Token 采样策略</h3><ol>
+<li><p>Greedy Decoding（贪心解码）<br>每一步都选概率最大的 token<br>优点是确定性强、速度快；缺点是容易陷入重复循环（同一个短语反复出现），生成内容单调。适合需要确定性输出的场景（如代码补全、格式化输出）。</p>
+</li>
+<li><p>Temperature 缩放<br>在 softmax 之前对 logits 除以一个温度参数 T<br>温度值          效果</p>
+</li>
+</ol>
+<p>T&lt;1（如 0.3）	分布变尖锐，高概率 token 更突出<br>T&#x3D;1             原始分布，不做调整<br>T&gt;1（如 1.5）	分布变平坦，低概率 token 被拉高<br>T→0	            退化为 greedy decoding<br>T→∞             退化为均匀分布，完全随机</p>
+<ol start="3">
+<li><p>Top-K 采样<br>只保留概率最高的 K 个 token，将其余 token 的概率置零后重新归一化<br>Top-K 的问题在于 K 是固定的。有时候概率分布很集中（只有 2-3 个合理选项），K&#x3D;50 就引入了太多噪声；有时候分布很分散（很多 token 都合理），<br>K&#x3D;50 又太限制了</p>
+</li>
+<li><p>Top-P 采样（Nucleus Sampling）<br>一种自适应的方案：按概率从大到小排列 token，累加概率直到超过阈值P（如 0.9），只在这个”核”内采样：<br>优势在于自适应性：分布集中时自动缩小候选集，分布分散时自动扩大候选集。</p>
+</li>
+</ol>
+<ul>
+<li>实际使用中，Temperature + Top-P 的组合最为常见，比如 temperature&#x3D;0.7, top_p&#x3D;0.9。</li>
+</ul>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-08-26</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-08-27</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 

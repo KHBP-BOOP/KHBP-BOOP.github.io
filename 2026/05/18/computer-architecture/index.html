@@ -45,7 +45,7 @@
 <meta property="og:image" content="http://example.com/image-3.png">
 <meta property="og:image" content="http://example.com/image-4.png">
 <meta property="article:published_time" content="2026-05-18T07:36:35.000Z">
-<meta property="article:modified_time" content="2026-07-05T13:05:56.549Z">
+<meta property="article:modified_time" content="2026-08-27T03:18:12.166Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image-2.png">
 
@@ -172,8 +172,8 @@
 <h3 id="4体交叉编址存储器"><a href="#4体交叉编址存储器" class="headerlink" title="4体交叉编址存储器"></a>4体交叉编址存储器</h3><p>通常指低位交叉，是将主存分为 4 个独立的模块<br>M0 0 4 8 …<br>M1 1 5 9 …<br>M2 …<br>M3 …</p>
 <p><strong>相同模块</strong>的地址被<strong>连续</strong>（相邻）访问，必然会引发严重的访存冲突</p>
 <p>地址映射表除了存储 12 位 Tag 以外，通常还需要 1 位有效位（Valid bit） 来标识该块数据是否有效</p>
-<h2 id="数据交换的单位"><a href="#数据交换的单位" class="headerlink" title="数据交换的单位"></a>数据交换的单位</h2><p>Cache 与主存之间：以数据块（或称字块、Cache Line）为单位进行数据交换，典型大小为 (64) 字节。利用空间局部性原理，一次调入一片连续数据。</p>
-<p>主存与辅存之间：以页（Page）或段为单位进行数据交换（实现虚拟存储器功能），典型大小为 (4) KB。</p>
+<h2 id="数据交换的单位"><a href="#数据交换的单位" class="headerlink" title="数据交换的单位"></a>数据交换的单位</h2><p>Cache 与主存之间：以数据块（或称字块、Cache Line）为单位进行数据交换，典型大小为 64 字节。利用空间局部性原理，一次调入一片连续数据。</p>
+<p>主存与辅存之间：以页（Page）或段为单位进行数据交换（实现虚拟存储器功能），典型大小为 4 KB。</p>
 <p>CPU 与 Cache 之间：以字（Word）或字节为单位进行数据交换</p>
 <p><img src="/image-4.png" alt="alt text"></p>
 <h2 id="程序中断法"><a href="#程序中断法" class="headerlink" title="程序中断法"></a>程序中断法</h2><p>向PC存入中断服务程序入口地址的方法————硬件向量法：</p>
@@ -184,7 +184,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-07-05</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-08-27</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
