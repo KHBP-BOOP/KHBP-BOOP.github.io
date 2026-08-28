@@ -25,7 +25,7 @@
     <!-- meta -->
 
 
-<title>CUDAProgramming | Hexo</title>
+<title>CUDAProgramming | KHBP&#39;s domain</title>
 
 
 
@@ -38,11 +38,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="CUDAProgramming">
 <meta property="og:url" content="http://example.com/2026/07/23/CUDAProgramming/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="KHBP&#39;s domain">
 <meta property="og:description" content="编译过程（简化）.cu源文件  ——》 通用PTX代码 ——–》 各个GPU专属SASS机器码            nvcc                GPU驱动 硬件限制Block 每维最大线程数	x:1024, y:1024, z:64Block 内最大线程总数	1024Grid 每维最大 Block 数	x:2的31次方−1, y:65535, z:65535每个 SM 最大活跃线程数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-07-23T09:47:46.000Z">
-<meta property="article:modified_time" content="2026-08-27T06:19:23.580Z">
+<meta property="article:modified_time" content="2026-08-28T04:26:25.317Z">
+<meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -89,6 +90,10 @@
         
         
         
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
 
         
         
@@ -152,7 +157,7 @@
 <h3 id="warp"><a href="#warp" class="headerlink" title="warp"></a>warp</h3><p>SM（Streaming Multiprocessor）以 Warp 为粒度调度执行。同一Warp内的threads在同一时钟周期内执行同一条指令（对应SIMT编程模型）</p>
 <h4 id="warp-divergence"><a href="#warp-divergence" class="headerlink" title="warp divergence"></a>warp divergence</h4><p>遵循SIMT范式的代码中出现分支路径且各个分支运行的线程数量不可忽略，出现算力浪费</p>
 <h3 id="Occupancy"><a href="#Occupancy" class="headerlink" title="Occupancy"></a>Occupancy</h3><p>同一 SM 上实际活跃的 Warp 数 &#x2F; SM 理论支持的最大 Warp 数</p>
-<p>cudaOccupancyMaxActiveBlocksPerMultiprocessor(<br>    &amp;numBlocks,<br>    MyKernel,<br>    blockSize,<br>    0);</p>
+<p>cudaOccupancyMaxActiveBlocksPerMultiprocessor(<br>&emsp;&emsp;&amp;numBlocks,<br>&emsp;&emsp;MyKernel,<br>&emsp;&emsp;blockSize,<br>&emsp;&emsp;0);</p>
 <h3 id="原语"><a href="#原语" class="headerlink" title="原语"></a>原语</h3><h4 id="warp级原语"><a href="#warp级原语" class="headerlink" title="warp级原语"></a>warp级原语</h4><p>T __shfl_sync(unsigned mask, T var, int srcLane, int width&#x3D;32);</p>
 <p>mask 指定参与此操作的活跃线程掩码。</p>
 <p>作用：确保只有掩码中标记为 1 的线程参与同步和数据交换。这通常直接使用 __activemask()（返回当前 warp 中所有活跃线程的掩码），以保证正确性和性能。</p>
@@ -173,7 +178,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-08-27</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-08-28</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
@@ -234,7 +239,7 @@
     
         
         <p class="footer-copyright">
-            Copyright © 2026 <a href="/">Hexo</a>
+            Copyright © 2026 <a href="/">KHBP&#39;s domain</a>
         </p>
     
     
