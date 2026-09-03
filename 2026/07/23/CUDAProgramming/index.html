@@ -41,10 +41,12 @@
 <meta property="og:site_name" content="KHBP&#39;s domain">
 <meta property="og:description" content="编译过程（简化）.cu源文件  ——》 通用PTX代码 ——–》 各个GPU专属SASS机器码            nvcc                GPU驱动 硬件限制Block 每维最大线程数	x:1024, y:1024, z:64Block 内最大线程总数	1024Grid 每维最大 Block 数	x:2的31次方−1, y:65535, z:65535每个 SM 最大活跃线程数">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image.png">
 <meta property="article:published_time" content="2026-07-23T09:47:46.000Z">
-<meta property="article:modified_time" content="2026-08-28T07:45:51.801Z">
+<meta property="article:modified_time" content="2026-09-03T07:27:35.179Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image.png">
 
 
 
@@ -152,6 +154,10 @@
 <h4 id="warp-divergence"><a href="#warp-divergence" class="headerlink" title="warp divergence"></a>warp divergence</h4><p>遵循SIMT范式的代码中出现分支路径且各个分支运行的线程数量不可忽略，出现算力浪费</p>
 <h3 id="Occupancy"><a href="#Occupancy" class="headerlink" title="Occupancy"></a>Occupancy</h3><p>同一 SM 上实际活跃的 Warp 数 &#x2F; SM 理论支持的最大 Warp 数</p>
 <p>cudaOccupancyMaxActiveBlocksPerMultiprocessor(<br>&emsp;&emsp;&amp;numBlocks,<br>&emsp;&emsp;MyKernel,<br>&emsp;&emsp;blockSize,<br>&emsp;&emsp;0);</p>
+<h2 id="grid-block-cluster-thread"><a href="#grid-block-cluster-thread" class="headerlink" title="grid block cluster thread"></a>grid block cluster thread</h2><p>当应用程序启动内核时，它会使用许多线程，通常是数百万个线程</p>
+<p>一个线程块（Block）中的线程数量通常为32的倍数，最常见的大小为 128、256 或 512，最大1024<br>一个grid可能包含数百万个线程块，而执行该网格的GPU可能只有几十或几百个SM<br>CUDA 当前最多允许一个集群（Cluster）内有 8 个线程块</p>
+<p><img src="/image.png" alt="alt text"></p>
+<p>CTA（Cooperative Thread Array，协作线程数组）是thread block在PTX &#x2F; 底层执行模型中的具体执行单元</p>
 <h3 id="原语"><a href="#原语" class="headerlink" title="原语"></a>原语</h3><h4 id="warp级原语"><a href="#warp级原语" class="headerlink" title="warp级原语"></a>warp级原语</h4><p>T __shfl_sync(unsigned mask, T var, int srcLane, int width&#x3D;32);</p>
 <p>mask 指定参与此操作的活跃线程掩码。</p>
 <p>作用：确保只有掩码中标记为 1 的线程参与同步和数据交换。这通常直接使用 __activemask()（返回当前 warp 中所有活跃线程的掩码），以保证正确性和性能。</p>
@@ -172,7 +178,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-08-28</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-03</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 

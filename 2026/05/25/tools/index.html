@@ -44,7 +44,7 @@
 <meta property="og:description" content="CMakecmake_minimum_required()必须写在Root CML（项目根目录下的CMakeList.txt）的第一行project()通常被建议写在第二行 target是开发者为一组属性指定的名称 PRIVATE 这一property只属于MyProgram且不可被继承一个可执行文件或库文件的作用域关键字（scope keyword）绝大部分情况下应为PRIVATE，因为其他项目">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-25T09:05:48.000Z">
-<meta property="article:modified_time" content="2026-09-02T02:38:39.284Z">
+<meta property="article:modified_time" content="2026-09-03T09:51:06.593Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta property="article:tag" content="CMake, hexo, ncu">
 <meta name="twitter:card" content="summary_large_image">
@@ -151,6 +151,13 @@
 <p>使用INTERFACE方式链接库，编译目标时，只有链接了目标的其他目标会与指定的库链接。</p>
 <h3 id="set-source-files-properties"><a href="#set-source-files-properties" class="headerlink" title="set_source_files_properties"></a>set_source_files_properties</h3><p>set_source_files_properties(<files> …                         # 必选选项<br>                            [DIRECTORY <dirs> …]              # 可选选项  显式地指定在哪个或哪些目录作用域中设置源文件属性<br>                            [TARGET_DIRECTORY <targets> …]    # 可选选项  指定在哪个或哪些创建了这些目标的目录作用域中设置源文件属性<br>                            PROPERTIES <prop1> <value1>         # 必选选项<br>                            [<prop2> <value2>] …)</p>
 <h2 id="Nsight-Compute"><a href="#Nsight-Compute" class="headerlink" title="Nsight Compute"></a>Nsight Compute</h2><p>大多数情况下，合并访问针对全局内存而言。<br>在现代profiler术语中，uncoalesced shared accesses可被理解为probably bank-conflicted；excessive wavefronts意为超额的内存事务，其中wavefronts为memory transaction的另一种说法，同时，该偏正短语含义为：本次内存请求导致了多于*所需最小wavefront数量（通常为1至2个）*的wavefront数</p>
+<h4 id="关键指标"><a href="#关键指标" class="headerlink" title="关键指标"></a>关键指标</h4><p>wave per SM</p>
+<p>每线程的寄存器文件占用量是影响sm occupancy的重要因素。oc高不代表性能一定高，但oc过低总代表较弱的隐藏延迟的能力</p>
+<h4 id="kernel-replay"><a href="#kernel-replay" class="headerlink" title="kernel replay"></a>kernel replay</h4><p>保存GPU memory中kernel可被访问的部分的backup；<br>第一次replay pass后，确定实际被写入的部分，即subset；<br>之后的每次replay pass，只需将subset restore回原始位置</p>
+<ul>
+<li>为什么需要replay？<br>单次 pass 能同时采集的硬件性能计数器有限，需要通过多个 replay pass 分批采集不同的 metrics，最终组合成完整的分析结果</li>
+<li>每次 replay pass 都需要先恢复 subset？<br>使 kernel 每次执行时看到相同的内存初始状态，从而保证不同 pass 获取的 profiling metrics 可以对应到同一次 kernel 执行条件</li>
+</ul>
 <h4 id="port端口"><a href="#port端口" class="headerlink" title="port端口"></a>port端口</h4><p>GPU 中的很多单元（例如缓存、存储单元、SM 内部某些模块等）会用一个公共的数据端口来同时处理输入流量和输出流量，读和写、进和出可能共用同一个物理端口，而不是各自独立拥有端口。共享这个端口的各条“链路”（可以理解为某一种流量、某一个方向、某一个子通道）单独看，可能利用率都不高，远没有达到它们各自的峰值带宽；但是，所有这些链路加在一起的总流量，可能已经把这个共享端口的峰值带宽用满了</p>
 <p>当 NCU 显示某个单元的数据端口利用率已经接近峰值时，即使各个子链路利用率不高，也不能认为没有瓶颈，需要关注的是端口级别的聚合带宽，而不是某一条热点链路的单路带宽<br>优化方向应该是降低该端口的总流量，例如减少不必要的读写、改善数据复用、调整访问模式以减少对同一端口的争用。</p>
 <h2 id="nvidia-smi"><a href="#nvidia-smi" class="headerlink" title="nvidia-smi"></a>nvidia-smi</h2><ul>
@@ -176,7 +183,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-02</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-03</p></div> 
     <div class="post-entry__tags"><a href="/tags/CMake-hexo-ncu/" class="post-tags__link button"># CMake, hexo, ncu</a></div> 
 </article>
 
