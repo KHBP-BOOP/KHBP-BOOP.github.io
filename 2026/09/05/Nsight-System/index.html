@@ -25,7 +25,7 @@
     <!-- meta -->
 
 
-<title>operator_optimization | KHBP&#39;s domain</title>
+<title>Nsight_System | KHBP&#39;s domain</title>
 
 
 
@@ -34,15 +34,15 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="“HPC is all about reducing data movement”.Roofline计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$ 计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$ 计算强度上限 - $\pi$ &#x2F; $\beta$ 自变量$I$ ： 程序计算强度。计算公式： 单个样本在程序中发生的浮点运算总数 &#x2F; 单个样本">
+    <meta name="description" content="默认情况下，Nsight Systems在应用程序的整个运行过程中收集性能分析数据，但同时提供了两种通过插入代码以限制性能分析范围的方法：    限制对CUDA程序分析的范围：在包含了头文件cuda_profiler_api.h的情况下，使用cudaProfilerStart()开始分析，cudaProfilerStop()结束分析。 限制对CPU活动分析的范围：NVIDIA Tools Exte">
 <meta property="og:type" content="article">
-<meta property="og:title" content="operator_optimization">
-<meta property="og:url" content="http://example.com/2026/07/24/operator-optimization/index.html">
+<meta property="og:title" content="Nsight_System">
+<meta property="og:url" content="http://example.com/2026/09/05/Nsight-System/index.html">
 <meta property="og:site_name" content="KHBP&#39;s domain">
-<meta property="og:description" content="“HPC is all about reducing data movement”.Roofline计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$ 计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$ 计算强度上限 - $\pi$ &#x2F; $\beta$ 自变量$I$ ： 程序计算强度。计算公式： 单个样本在程序中发生的浮点运算总数 &#x2F; 单个样本">
+<meta property="og:description" content="默认情况下，Nsight Systems在应用程序的整个运行过程中收集性能分析数据，但同时提供了两种通过插入代码以限制性能分析范围的方法：    限制对CUDA程序分析的范围：在包含了头文件cuda_profiler_api.h的情况下，使用cudaProfilerStart()开始分析，cudaProfilerStop()结束分析。 限制对CPU活动分析的范围：NVIDIA Tools Exte">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-07-24T01:58:07.000Z">
-<meta property="article:modified_time" content="2026-09-04T04:29:59.518Z">
+<meta property="article:published_time" content="2026-09-05T07:27:35.000Z">
+<meta property="article:modified_time" content="2026-09-05T09:18:45.417Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -115,11 +115,13 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        operator_optimization
+        Nsight_System
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2026/07/" class="post-meta__date button">2026-07-24</a>
+        <a href="/archives/2026/09/" class="post-meta__date button">2026-09-05</a>
         
+    <span class="separate-dot"></span><a href="/categories/nsight-system/" class="button">nsight system</a>
+
  
         
     
@@ -137,27 +139,36 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h3 id="“HPC-is-all-about-reducing-data-movement”"><a href="#“HPC-is-all-about-reducing-data-movement”" class="headerlink" title="“HPC is all about reducing data movement”."></a><em>“HPC is all about reducing data movement”.</em></h3><h2 id="Roofline"><a href="#Roofline" class="headerlink" title="Roofline"></a>Roofline</h2><p>计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$</p>
-<p>计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$</p>
-<p>计算强度上限 - $\pi$ &#x2F; $\beta$</p>
-<p>自变量$I$ ： 程序计算强度。<br>计算公式：</p>
-<p>单个样本在程序中发生的浮点运算总数 &#x2F;</p>
-<p>单个样本在程序中需进行的内存交换总量</p>
-<p>因变量$P$ ： 程序在计算平台上的每秒浮点运算次数，程序的理论性能值。</p>
-<p>$$<br>P &#x3D; \begin{cases}<br>\beta \cdot I, &amp; \text{when } I &lt; I_{\max} \quad \color{red}\text{Memory Bound} \<br>\pi, &amp; \text{when } I \geqslant I_{\max} \quad \color{green}\text{Compute Bound}<br>\end{cases}<br>$$</p>
-<p>Roofline模型表明硬件的固有限制、不同优化方向的潜在益处和优先级</p>
+        <p>默认情况下，Nsight Systems在应用程序的整个运行过程中收集性能分析数据，但同时提供了两种通过插入代码以限制性能分析范围的方法：  </p>
+<ol>
+<li>限制对CUDA程序分析的范围：在包含了头文件cuda_profiler_api.h的情况下，使用cudaProfilerStart()开始分析，cudaProfilerStop()结束分析。</li>
+<li>限制对CPU活动分析的范围：NVIDIA Tools Extension API (NVTX)</li>
+</ol>
+<h1 id="从CLI界面分析"><a href="#从CLI界面分析" class="headerlink" title="从CLI界面分析"></a>从CLI界面分析</h1><p>必须以管理员身份在Windows系统上运行CLI</p>
+<h2 id="两种命令行格式："><a href="#两种命令行格式：" class="headerlink" title="两种命令行格式："></a>两种命令行格式：</h2><ol>
+<li><p>nsys [global_option]<br>全局选项包含：-h&#x2F;–help， -v&#x2F;–version</p>
 <ul>
-<li><p>工作点位于带宽受限区域，提高算数强度：<br>增加数据重用：让每次从内存取出的数据参与更多计算<br>融合算子：例如把多个逐元素操作合并成一个 kernel，减少中间结果的读写<br>使用更小的数据类型：如 FP32 换 FP16，同样字节数能表示更多数据，提高 FLOP&#x2F;byte<br>改善访存模式：合并访问、利用共享内存&#x2F;缓存，减少无效数据传输</p>
-</li>
-<li><p>工作点位于计算受限区域，充分利用计算单元：<br>提高指令级并行（ILP）：减少依赖，让多个浮点运算单元同时工作<br>使用 SIMD&#x2F;向量化：确保代码编译为高效的向量指令<br>避免流水线停顿：减少分支、缓存未命中等导致的空闲周期<br>利用所有核心&#x2F;线程：在多核 CPU 或 GPU 上保持足够的并行度<br>选择更高吞吐的精度：例如在数值允许时使用 FP16 或 INT8，利用更高的峰值算力</p>
-</li>
+<li>短选项和对应参数中间用一个空格连接，长选项和对应参数用等于号连接</li>
+<li>–duration –kill none  ？？</li>
 </ul>
-<h2 id="Tiling"><a href="#Tiling" class="headerlink" title="Tiling"></a>Tiling</h2><p>Tiling（分块） 优化的核心标志是使用 共享内存（<strong>shared</strong> memory）。</p>
-<p>它的主要目的是为了数据复用。如果一个数据被加载后，不仅当前线程要用，隔壁线程也要用（比如矩阵乘法、图像卷积、算滑动平均），我们就会把这一块数据先“搬”到片上的共享内存里缓存起来，避免大家反复去排队读取慢速的全局内存</p>
-
+</li>
+<li><p>nsys [command_switch][optional command_switch_options][application] [optional application_options]  </p>
+<ul>
+<li>command_switch包括：analyse、export、launch、profile、import等；  </li>
+<li>将选项设置为profile即意为启动并开始分析程序，使用格式：nsys [global-options] profile [options] [application] [application-arguments]</li>
+</ul>
+</li>
+</ol>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>nsys profile <app></p>
+<p>sudo nsys profile <app></p>
+<p>nsys profile –run-as&#x3D;<username> <app></p>
+<p>若–sample为none，–cpuctxsw默认值为none，程序启动后默认值变为process-tree</p>
+<p>若–sample不为none，–cpuctxsw的值被硬编码为与前者相同的值</p>
+<p>二者功能的相互制衡关系？</p>
+<h1 id="可视化从命令行获得的性能分析文件"><a href="#可视化从命令行获得的性能分析文件" class="headerlink" title="可视化从命令行获得的性能分析文件"></a>可视化从命令行获得的性能分析文件</h1>
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-04</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-05</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
@@ -165,30 +176,16 @@
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2026/07/29/performance-analysis/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            performance_analysis
-                        </div>
-                    </div>
-                </a>
-            
         </div>
         <div class="nav__next">
             
-                <a href="/2026/07/23/CUDAProgramming/" class="nav__link">
+                <a href="/2026/08/28/git-documentation/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            CUDA Programming
+                            git documentation
                         </div>
                     </div>
                     <div>
