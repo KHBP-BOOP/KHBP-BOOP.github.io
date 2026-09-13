@@ -34,15 +34,15 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="成员函数中形参的默认值，在成员函数声明和定义中的一处指定，一般在声明中指定 可被拷贝、被移动的类型的变量才能用作return值 四种存储期自动存储期局部变量、函数形参（Parameter，只是具有自动存储期的局部对象，在进入函数体时由实参（Argument）进行初始化（按值或按引用））、临时对象 动态存储期new&#x2F;malloc、delete&#x2F;free管理的变量或对象 线程存储期">
+    <meta name="description" content="成员函数中形参的默认值，在成员函数声明和定义中的一处指定，一般在声明中指定 可被拷贝、被移动的类型的变量才能用作return值 RVO NRVO？ 四种存储期自动存储期局部变量、函数形参（Parameter，只是具有自动存储期的局部对象，在进入函数体时由实参（Argument）进行初始化（按值或按引用））、临时对象 动态存储期new&#x2F;malloc、delete&#x2F;free管理的变">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cpp-tips">
 <meta property="og:url" content="http://example.com/2026/04/08/cpp_tips/index.html">
 <meta property="og:site_name" content="KHBP&#39;s domain">
-<meta property="og:description" content="成员函数中形参的默认值，在成员函数声明和定义中的一处指定，一般在声明中指定 可被拷贝、被移动的类型的变量才能用作return值 四种存储期自动存储期局部变量、函数形参（Parameter，只是具有自动存储期的局部对象，在进入函数体时由实参（Argument）进行初始化（按值或按引用））、临时对象 动态存储期new&#x2F;malloc、delete&#x2F;free管理的变量或对象 线程存储期">
+<meta property="og:description" content="成员函数中形参的默认值，在成员函数声明和定义中的一处指定，一般在声明中指定 可被拷贝、被移动的类型的变量才能用作return值 RVO NRVO？ 四种存储期自动存储期局部变量、函数形参（Parameter，只是具有自动存储期的局部对象，在进入函数体时由实参（Argument）进行初始化（按值或按引用））、临时对象 动态存储期new&#x2F;malloc、delete&#x2F;free管理的变">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-08T09:03:20.000Z">
-<meta property="article:modified_time" content="2026-08-24T07:50:07.509Z">
+<meta property="article:modified_time" content="2026-09-13T13:03:15.756Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -120,6 +120,8 @@
     <div class="post-title__meta">
         <a href="/archives/2026/04/" class="post-meta__date button">2026-04-08</a>
         
+    <span class="separate-dot"></span><a href="/categories/cpp/" class="button">cpp</a>
+
  
         
     
@@ -138,7 +140,7 @@
     <div class="post__header"></div>
     <div class="post__content">
         <p>成员函数中形参的默认值，在成员函数声明和定义中的一处指定，一般在声明中指定</p>
-<p>可被拷贝、被移动的类型的变量才能用作return值</p>
+<p>可被拷贝、被移动的类型的变量才能用作return值 RVO NRVO？</p>
 <h2 id="四种存储期"><a href="#四种存储期" class="headerlink" title="四种存储期"></a>四种存储期</h2><h3 id="自动存储期"><a href="#自动存储期" class="headerlink" title="自动存储期"></a>自动存储期</h3><p>局部变量、函数形参（Parameter，只是具有自动存储期的局部对象，在进入函数体时由实参（Argument）进行初始化（按值或按引用））、临时对象</p>
 <h3 id="动态存储期"><a href="#动态存储期" class="headerlink" title="动态存储期"></a>动态存储期</h3><p>new&#x2F;malloc、delete&#x2F;free管理的变量或对象</p>
 <h3 id="线程存储期"><a href="#线程存储期" class="headerlink" title="线程存储期"></a>线程存储期</h3><p>thread_local关键字修饰的变量</p>
@@ -241,7 +243,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-08-24</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-13</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
