@@ -43,7 +43,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/image.png">
 <meta property="article:published_time" content="2026-07-23T09:47:46.000Z">
-<meta property="article:modified_time" content="2026-09-03T07:27:35.179Z">
+<meta property="article:modified_time" content="2026-09-17T03:58:17.988Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image.png">
@@ -173,12 +173,14 @@
 </li>
 </ol>
 <p>__shfl_down_sync(0xffffffff, val, offset);</p>
+<h3 id="GPU执行模型"><a href="#GPU执行模型" class="headerlink" title="GPU执行模型"></a>GPU执行模型</h3><p>线程数应远高于核心数或指令管线数<br>线程块数应数倍高于SM数（如果总 block 数量刚好能被一个完整 wave 的容量大小整除，那么波数是整数；否则就会出现小数或非整数波数，表示存在 partial wave，导致尾部效应tail effect，同时这通常意味着GPU资源利用率的下降，对于执行时间较短的kernel的影响尤其明显。对于高端 GPU，通常只有线程块少于 300 个的启动才需要检查尾部效应）</p>
+<p>wave代表一个包含并行执行的线程的集合</p>
 <p>指针别名</p>
 <p>__restrict__</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-03</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-17</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
@@ -186,7 +188,7 @@
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2026/07/24/operator-optimization/" class="nav__link">
+                <a href="/2026/07/24/operation-optimization/" class="nav__link">
                     <div>
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
                     </div>

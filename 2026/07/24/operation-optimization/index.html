@@ -37,12 +37,12 @@
     <meta name="description" content="“HPC is all about reducing data movement”.Roofline计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$ 计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$ 计算强度上限 - $\pi$ &#x2F; $\beta$ 自变量$I$ ： 程序计算强度。计算公式： 单个样本在程序中发生的浮点运算总数 &#x2F; 单个样本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="operator_optimization">
-<meta property="og:url" content="http://example.com/2026/07/24/operator-optimization/index.html">
+<meta property="og:url" content="http://example.com/2026/07/24/operation-optimization/index.html">
 <meta property="og:site_name" content="KHBP&#39;s domain">
 <meta property="og:description" content="“HPC is all about reducing data movement”.Roofline计算平台算力上限（每秒可执行的最大浮点运算数量）- $\pi$ 计算平台广义内存带宽上限（内存每秒可交换的最大数据量）- $\beta$ 计算强度上限 - $\pi$ &#x2F; $\beta$ 自变量$I$ ： 程序计算强度。计算公式： 单个样本在程序中发生的浮点运算总数 &#x2F; 单个样本">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-07-24T01:58:07.000Z">
-<meta property="article:modified_time" content="2026-09-04T04:29:59.518Z">
+<meta property="article:modified_time" content="2026-09-17T08:27:17.781Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -145,6 +145,7 @@
 <p>单个样本在程序中需进行的内存交换总量</p>
 <p>因变量$P$ ： 程序在计算平台上的每秒浮点运算次数，程序的理论性能值。</p>
 <p>$$<br>P &#x3D; \begin{cases}<br>\beta \cdot I, &amp; \text{when } I &lt; I_{\max} \quad \color{red}\text{Memory Bound} \<br>\pi, &amp; \text{when } I \geqslant I_{\max} \quad \color{green}\text{Compute Bound}<br>\end{cases}<br>$$</p>
+<p>公式推导：<br><a target="_blank" rel="noopener" href="https://docs.nvidia.com/deeplearning/performance/dl-performance-gpu-background/index.html#understand-perf">https://docs.nvidia.com/deeplearning/performance/dl-performance-gpu-background/index.html#understand-perf</a></p>
 <p>Roofline模型表明硬件的固有限制、不同优化方向的潜在益处和优先级</p>
 <ul>
 <li><p>工作点位于带宽受限区域，提高算数强度：<br>增加数据重用：让每次从内存取出的数据参与更多计算<br>融合算子：例如把多个逐元素操作合并成一个 kernel，减少中间结果的读写<br>使用更小的数据类型：如 FP32 换 FP16，同样字节数能表示更多数据，提高 FLOP&#x2F;byte<br>改善访存模式：合并访问、利用共享内存&#x2F;缓存，减少无效数据传输</p>
@@ -157,7 +158,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-04</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-17</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
