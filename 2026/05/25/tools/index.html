@@ -44,7 +44,7 @@
 <meta property="og:description" content="CMakeCMake的使用围绕CMakeList.txt（有时又称lists file或CML）展开，CML可以向CMake提供指令，说明如何处理所在目录或其子目录中的本地文件和操作 cmake_minimum_required()必须写在Root CML（项目根目录下的CMakeList.txt）的第一行（root CML是CMake configuration过程中完成初始设置的起点）proj">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-25T09:05:48.000Z">
-<meta property="article:modified_time" content="2026-09-13T12:39:32.444Z">
+<meta property="article:modified_time" content="2026-09-18T11:44:48.750Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta property="article:tag" content="CMake, hexo, ncu">
 <meta name="twitter:card" content="summary_large_image">
@@ -162,6 +162,13 @@
 <p>使用PRIVATE方式链接库，编译目标时，只有目标会与指定的库链接；</p>
 <p>使用INTERFACE方式链接库，编译目标时，只有链接了目标的其他目标会与指定的库链接。</p>
 <h3 id="set-source-files-properties"><a href="#set-source-files-properties" class="headerlink" title="set_source_files_properties"></a>set_source_files_properties</h3><p>set_source_files_properties(<files> …                         # 必选选项<br>                            [DIRECTORY <dirs> …]              # 可选选项  显式地指定在哪个或哪些目录作用域中设置源文件属性<br>                            [TARGET_DIRECTORY <targets> …]    # 可选选项  指定在哪个或哪些创建了这些目标的目录作用域中设置源文件属性<br>                            PROPERTIES <prop1> <value1>         # 必选选项<br>                            [<prop2> <value2>] …)</p>
+<h2 id="CUDA-GDB"><a href="#CUDA-GDB" class="headerlink" title="CUDA-GDB"></a>CUDA-GDB</h2><p>用户需拥有写入和执行 CUDA-GDB用到的文件 的权限</p>
+<p>编译时必须向nvcc传递 -g -G 选项。同时这意味着编译优化选项为-O0，即除十分有限的死代码消除相关优化和寄存器溢出相关优化外，不进行其他优化<br>调试信息会被包含进二进制可执行文件，即该文件体积会变大</p>
+<h2 id="nvcc-编译选项"><a href="#nvcc-编译选项" class="headerlink" title="nvcc 编译选项"></a>nvcc 编译选项</h2><p>-g<br>生成host端代码的调试信息，GDB等类似工具依靠它们进行调试</p>
+<p>-G<br>生成device端代码的调试信息，CUDA-GDB依靠它们进行调试。使用该选项会使nvcc避免进行一部分优化。</p>
+<p>-lineinfo<br>生成device端代码的行号信息，可以在性能分析工具中看到源代码。不会降低执行性能</p>
+<p>nvcc默认对device端代码使用-O3优化等级（最高优化等级）</p>
+<p>-Xptxas 向PTX汇编器工具ptxas传递参数<br>例：-Xptxas&#x3D;-maxrregcount&#x3D;N 指定每个线程可使用的最大寄存器数</p>
 <h2 id="nvidia-smi"><a href="#nvidia-smi" class="headerlink" title="nvidia-smi"></a>nvidia-smi</h2><ul>
 <li><p>查看拓扑结构<br>nvidia-smi topo -m</p>
 </li>
@@ -185,7 +192,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-13</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-18</p></div> 
     <div class="post-entry__tags"><a href="/tags/CMake-hexo-ncu/" class="post-tags__link button"># CMake, hexo, ncu</a></div> 
 </article>
 

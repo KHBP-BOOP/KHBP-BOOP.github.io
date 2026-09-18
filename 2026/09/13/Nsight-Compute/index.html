@@ -42,7 +42,7 @@
 <meta property="og:description" content="一个函数在给定的计算平台上的性能通常被三个因素限制内存带宽 数学计算带宽 延迟 大多数情况下，合并访问针对全局内存而言。在现代profiler术语中，uncoalesced shared accesses可被理解为probably bank-conflicted；excessive wavefronts意为超额的内存事务，其中wavefronts为memory transaction的另一种说法，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-13T01:21:56.000Z">
-<meta property="article:modified_time" content="2026-09-17T08:41:36.623Z">
+<meta property="article:modified_time" content="2026-09-18T01:26:18.601Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -142,6 +142,7 @@
 <h2 id="关键指标"><a href="#关键指标" class="headerlink" title="关键指标"></a>关键指标</h2><p>wave per SM<br>如果总 block 数量刚好能被一个完整 wave 的容量大小整除，那么波数是整数；否则就会出现小数或非整数波数，表示存在 partial wave，导致尾部效应tail effect，同时这通常意味着GPU资源利用率的下降，对于执行时间较短的kernel的影响尤其明显</p>
 <p>流多处理器效率（SM Efficiency）</p>
 <p>每线程的寄存器文件占用量是影响sm occupancy的重要因素。oc高不代表性能一定高，但oc过低总代表较弱的隐藏延迟的能力</p>
+<h2 id="Roofline-Chart"><a href="#Roofline-Chart" class="headerlink" title="Roofline Chart"></a>Roofline Chart</h2><p>性能 (FLOP&#x2F;s) &#x3D; 算术强度 (FLOP&#x2F;byte) × 内存带宽 (byte&#x2F;s)<br>log y &#x3D; log a + log x<br>故Roofline图中内存瓶颈部分表现为斜率为1、截距为带宽值对数的一次函数</p>
 <h2 id="kernel-replay"><a href="#kernel-replay" class="headerlink" title="kernel replay"></a>kernel replay</h2><p>保存GPU memory中kernel可被访问的部分的backup；<br>第一次replay pass后，确定实际被写入的部分，即subset；<br>之后的每次replay pass，只需将subset restore回原始位置</p>
 <ul>
 <li>为什么需要replay？<br>单次 pass 能同时采集的硬件性能计数器有限，需要通过多个 replay pass 分批采集不同的 metrics，最终组合成完整的分析结果</li>
@@ -167,7 +168,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-17</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-18</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
