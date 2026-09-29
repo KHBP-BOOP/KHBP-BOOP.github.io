@@ -42,7 +42,7 @@
 <meta property="og:description" content="成员函数中形参的默认值，在成员函数声明和定义中的一处指定，一般在声明中指定 可被拷贝、被移动的类型的变量才能用作return值 RVO NRVO？ 四种存储期自动存储期局部变量、函数形参（Parameter，只是具有自动存储期的局部对象，在进入函数体时由实参（Argument）进行初始化（按值或按引用））、临时对象 动态存储期new&#x2F;malloc、delete&#x2F;free管理的变">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-08T09:03:20.000Z">
-<meta property="article:modified_time" content="2026-09-13T13:03:15.756Z">
+<meta property="article:modified_time" content="2026-09-29T08:45:04.525Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -199,7 +199,7 @@
 <p>注：<br><strong>统一接口：</strong> 很多标准库算法（如 <code>std::accumulate</code>）并不直接拿 <code>T</code>，而是通过访问容器内部的 <code>value_type</code> 来保持一致性。<br><strong>类型变换：</strong> 有时候 <code>value_type</code> 可能和模板参数 <code>T</code> 不完全一致（虽然在 <code>vector</code> 中它们是一样的，但在某些特殊容器里可能会有细微差别）。<br><strong>可读性：</strong> <code>value_type</code> 明确指代“这是容器里存的东西”，而 <code>T</code> 只是一个抽象的符号。</p>
 </blockquote>
 <h2 id="static修饰全局函数-全局变量："><a href="#static修饰全局函数-全局变量：" class="headerlink" title="static修饰全局函数&#x2F;全局变量："></a>static修饰全局函数&#x2F;全局变量：</h2><h3 id="修饰全局函数会："><a href="#修饰全局函数会：" class="headerlink" title="修饰全局函数会："></a>修饰全局函数会：</h3><ul>
-<li>函数由外部链接性变为内部链接性，即无法在另一文件中借助extern使用该函数</li>
+<li>函数由外部链接性变为内部链接性，无法在另一文件中使用该函数</li>
 <li>使其可在其他文件中定义同名的函数，这是全局函数不允许的</li>
 </ul>
 <blockquote>
@@ -243,7 +243,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-13</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-09-29</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
