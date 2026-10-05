@@ -34,15 +34,15 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="文件的三种状态、三种区域每种状态和区域均一一对应：已提交  已修改      已暂存git仓库 工作目录    暂存区域 gitignore指定不再跟踪的文件以忽略它们 .gitignore 只对未跟踪文件生效，对于已追踪的文件没有影响。 git内部原理一个存放可寻址内容的文件系统 whether     是否whether or  不管……还是either or   要么……要么neither">
+    <meta name="description" content="配置、initialize本地repo两种初始化的方式    git init git clone  [directory name] pull下repo的所有数据，并check out最新版本的代码 可选的命令选项directory name。指定项目根目录的名称  常规工作流Git将文件分为两类untracked file - 不在上一次快照中的文件，只有一种状态untrackedtracke">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git documentation">
 <meta property="og:url" content="http://example.com/2026/08/28/git-documentation/index.html">
 <meta property="og:site_name" content="KHBP&#39;s domain">
-<meta property="og:description" content="文件的三种状态、三种区域每种状态和区域均一一对应：已提交  已修改      已暂存git仓库 工作目录    暂存区域 gitignore指定不再跟踪的文件以忽略它们 .gitignore 只对未跟踪文件生效，对于已追踪的文件没有影响。 git内部原理一个存放可寻址内容的文件系统 whether     是否whether or  不管……还是either or   要么……要么neither">
+<meta property="og:description" content="配置、initialize本地repo两种初始化的方式    git init git clone  [directory name] pull下repo的所有数据，并check out最新版本的代码 可选的命令选项directory name。指定项目根目录的名称  常规工作流Git将文件分为两类untracked file - 不在上一次快照中的文件，只有一种状态untrackedtracke">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-28T08:41:29.000Z">
-<meta property="article:modified_time" content="2026-09-11T01:24:00.626Z">
+<meta property="article:modified_time" content="2026-10-02T12:28:00.277Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -139,15 +139,30 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h2 id="文件的三种状态、三种区域"><a href="#文件的三种状态、三种区域" class="headerlink" title="文件的三种状态、三种区域"></a>文件的三种状态、三种区域</h2><p>每种状态和区域均一一对应：<br>已提交  已修改      已暂存<br>git仓库 工作目录    暂存区域</p>
-<h2 id="gitignore"><a href="#gitignore" class="headerlink" title="gitignore"></a>gitignore</h2><p>指定不再跟踪的文件以忽略它们</p>
-<p>.gitignore 只对未跟踪文件生效，对于已追踪的文件没有影响。</p>
+        <h1 id="配置、initialize本地repo"><a href="#配置、initialize本地repo" class="headerlink" title="配置、initialize本地repo"></a>配置、initialize本地repo</h1><p>两种初始化的方式  </p>
+<ol>
+<li><code>git init</code></li>
+<li>git clone <url> [directory name]<br> pull下repo的所有数据，并check out最新版本的代码<br> 可选的命令选项directory name。指定项目根目录的名称</li>
+</ol>
+<h1 id="常规工作流"><a href="#常规工作流" class="headerlink" title="常规工作流"></a>常规工作流</h1><p>Git将文件分为两类<br>untracked file - 不在上一次快照中的文件，只有一种状态untracked<br>tracked file - 在上一次快照中的文件，有unmodified，modified，staged三种状态</p>
+<p>git add .<br>暂存每一个未跟踪或未暂存的文件</p>
+<blockquote>
+<p>无需跟踪的文件，其文件模式应被写入 .gitignore ，避免被add至暂存区</p>
+</blockquote>
+<p>对已跟踪的文件（包括提交后暂未更改的文件、add到暂存区的文件，它们的状态为已暂存或未修改）进行编辑后，Git发现文件相较于上一次commit记录的快照发生了改变，此时将其标记为modified，等待开发者选择性地暂存和提交</p>
+<p>git commit [-a] -m “something…”<br>运行commit命令会记录<em>位于暂存区的文件的快照</em></p>
+<p>可选命令选项 -a 的作用：commit前自动暂存每一个已被跟踪的文件，此前无需运行git add相关命令<br>一次提交应对应一个修改</p>
+<p>git diff<br>查看未暂存的文件的更改<br>git diff –staged 或 git diff –cached<br>查看已暂存、待提交的文件的更改。–staged和–cached是同义词</p>
+<h2 id="忽略某个特定文件或文件模式"><a href="#忽略某个特定文件或文件模式" class="headerlink" title="忽略某个特定文件或文件模式"></a>忽略某个特定文件或文件模式</h2><p>指定不再跟踪的文件以忽略它们<br>.gitignore 只对未跟踪文件生效，对于已追踪的文件没有影响。</p>
+<h2 id="取消跟踪本地文件"><a href="#取消跟踪本地文件" class="headerlink" title="取消跟踪本地文件"></a>取消跟踪本地文件</h2><p>从暂存区删除已暂存的文件<br>commit本次更改</p>
+<p>？<br>暂存区是什么<br>git rm工作流</p>
+<h1 id="undo一些错误操作"><a href="#undo一些错误操作" class="headerlink" title="undo一些错误操作"></a>undo一些错误操作</h1><h1 id="browse项目的历史以及不同commit之间的更改"><a href="#browse项目的历史以及不同commit之间的更改" class="headerlink" title="browse项目的历史以及不同commit之间的更改"></a>browse项目的历史以及不同commit之间的更改</h1><h1 id="从remote-repo-pull或push"><a href="#从remote-repo-pull或push" class="headerlink" title="从remote repo pull或push"></a>从remote repo pull或push</h1><h2 id="文件的三种状态、三种区域"><a href="#文件的三种状态、三种区域" class="headerlink" title="文件的三种状态、三种区域"></a>文件的三种状态、三种区域</h2><p>每种状态和区域均一一对应：<br>已提交  已修改      已暂存<br>git仓库 工作目录    暂存区域</p>
 <h2 id="git内部原理"><a href="#git内部原理" class="headerlink" title="git内部原理"></a>git内部原理</h2><p>一个存放可寻址内容的文件系统</p>
 <p>whether     是否<br>whether or  不管……还是<br>either or   要么……要么<br>neither nor 既不……也不</p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-11</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-10-02</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
