@@ -44,7 +44,7 @@
 <meta property="og:image" content="http://example.com/image-6.png">
 <meta property="og:image" content="http://example.com/image-5.png">
 <meta property="article:published_time" content="2026-06-01T07:54:18.000Z">
-<meta property="article:modified_time" content="2026-08-27T01:50:23.625Z">
+<meta property="article:modified_time" content="2026-10-07T13:19:13.382Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image-6.png">
@@ -193,7 +193,7 @@
 <p>多层encoder块执行结束后，再执行decoder块</p>
 <p>每一层decoder的输出都包含任一token的多种语义且丰富程度且不断变深</p>
 <p>输入源序列，无因果掩码（但包含用于忽略填充位 <pad> 的 Padding 掩码）。采用双向自注意力机制（Bidirectional Self-Attention），使得各层 token 能够同时捕获左右双向的上下文信息，从而充分理解各 token 的深层语义</p>
-<p>输入目标序列，在自注意力层（Self-Attention）引入了因果掩码机制（Causal Mask）。这确保了在训练阶段，目标序列中各 token 在当前层的表征仅能结合自身及左侧已生成的上下文信息，从而防止未来信息泄露（Data Leakage）。随后，Decoder 通过交叉注意力机制（Cross-Attention &#x2F; Encoder-Decoder Attention），将自身的中间表征（作为 Query）与 Encoder 最终输出的完整上下文表征（作为 Key 和 Value）进行动态融合，从而实现基于源语言上下文的目标语言生成</p>
+<p>输入目标序列，在自注意力层（Self-Attention）引入了因果掩码机制（Causal Mask）。这确保了在训练阶段，目标序列中各 token 在当前层的表征仅能结合<strong>自身及左侧已生成的上下文信息</strong>，从而防止未来信息泄露（Data Leakage）。随后，Decoder 通过交叉注意力机制（Cross-Attention &#x2F; Encoder-Decoder Attention），将自身的中间表征（作为 Query）与 Encoder 最终输出的完整上下文表征（作为 Key 和 Value）进行动态融合，从而实现基于源语言上下文的目标语言生成</p>
 <p>交叉注意力，注意力的计算源来自两个地方，即融合encoder输出以及decoder掩码结果；</p>
 <p>自注意力，注意力的计算源来自一个地方，即输入自身的序列。</p>
 <p>原始transformer架构<br>推理过程 第一个输出token基于输入序列，之后的token基于输入序列以及生成的序列<br>训练过程 输入源序列、目标序列，输出包含“每个位置可能的token概率”的矩阵</p>
@@ -218,7 +218,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-08-27</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-10-07</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
