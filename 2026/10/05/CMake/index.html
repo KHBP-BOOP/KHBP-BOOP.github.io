@@ -42,7 +42,7 @@
 <meta property="og:description" content="CMake的使用围绕CMakeList.txt（有时又称lists file或CML）展开，CML可以向CMake提供指令，说明如何处理所在目录或其子目录中的本地文件和操作 CMake Language（或称CMakeLang）是CMake提供的图灵完备的语言，用以描述构建软件的复杂步骤 cmake_minimum_required()必须写在Root CML（项目根目录下的CMakeList.t">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-10-05T08:32:10.000Z">
-<meta property="article:modified_time" content="2026-10-05T12:23:06.484Z">
+<meta property="article:modified_time" content="2026-10-08T04:33:48.528Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -142,7 +142,7 @@
 <p>cmake_minimum_required()必须写在Root CML（项目根目录下的CMakeList.txt）的第一行（root CML是CMake configuration过程中完成初始设置的起点）<br>project()通常被建议写在第二行（告知CMake该软件项目的名称，并做一系列检查以确保环境适合构建软件）</p>
 <p>target是开发者为<strong>一个属性的集合</strong>指定的名称<br>property可以是：<br>target的产物的类型（如头文件的集合、可执行文件、库文件）<br>源文件<br>包含目录<br>target的最终输出文件的名称<br>……</p>
 <p>有一类属性被称为transitive properties（可传播的属性），需要使用PRIVATE、INTERFACE、PUBLIC关键字来设置其传播方式，其他大部分属性则不需要  </p>
-<p>PRIVATE  指明这一property只<strong>可见于</strong>对应的target        ，不可被继承<br>INTERFACE  指明这一property只<strong>可见于</strong>链接了对应target的target  </p>
+<p>PRIVATE  指明这一property只<strong>可见于</strong>对应的target（不可被继承？）<br>修饰<em>用于构建该目标的属性</em><br>INTERFACE  指明这一property只<strong>可见于</strong>链接了对应target的target<br>修饰<em>给消费者（链接了该目标的目标）传递的属性</em><br>PUBLIC  以上两种作用的结合<br>修饰<em>同时有以上两种需求的属性</em></p>
 <p>一个可执行文件或库文件的作用域关键字（scope keyword）绝大部分情况下应为PRIVATE，因为其他项目或库通常无需链接它们<br>源文件仅包含头文件的库的transitive properties的传播方式应为INTERFACE，因为它们会被复制进.cc文件，跟随它们一起构建，无需单独构建</p>
 <p>-配置<br> cmake -B <relative-path><br> 或会污染项目文件结构的内源构建方式<br> cmake</p>
 <p>cmake –build <relative-path></p>
@@ -185,10 +185,14 @@ endfunction()
 <p> ${sourceDir} 指向项目的根目录</p>
 <p>regex    regular expression 正则表达式</p>
 <p>重新配置生成、构建           cmake –fresh -S <path> -B <path><br>                           cmake –build <path><br>重新–clean-first构建       cmake –build <path> –clean-first<br>重新构建                    cmake –build <path></p>
-
+<h1 id="target命令"><a href="#target命令" class="headerlink" title="target命令"></a>target命令</h1><p>consume the target<br>（消费者身份的target）使用（生产者身份的）target</p>
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><h2 id="高级-谨慎使用"><a href="#高级-谨慎使用" class="headerlink" title="高级&#x2F;谨慎使用"></a>高级&#x2F;谨慎使用</h2><p>get_target_property() 及 set_target_properties()<br>通过名称直接访问目标的属性。允许为目标指定名称自定义的属性</p>
+<p>目标的大多数属性应通过对应的专用命令访问，但仍存在只能通过以上两个命令访问的属性</p>
+<p>target_precompile_headers()<br>指定一个已被创建的target、一个或多个被作用域关键字（scope keyword）修饰的头文件，预编译这些头文件并将产物文件包含在target的每个TU（翻译单元）中</p>
+<h2 id="非必要不使用"><a href="#非必要不使用" class="headerlink" title="非必要不使用"></a>非必要不使用</h2>
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-10-05</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-10-08</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 

@@ -44,7 +44,7 @@
 <meta property="og:image" content="http://example.com/image-6.png">
 <meta property="og:image" content="http://example.com/image-5.png">
 <meta property="article:published_time" content="2026-06-01T07:54:18.000Z">
-<meta property="article:modified_time" content="2026-10-07T13:19:13.382Z">
+<meta property="article:modified_time" content="2026-10-09T12:31:16.147Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image-6.png">
@@ -148,6 +148,9 @@
 <p>大模型在数学上可以抽象为将输入序列映射到输出概率分布的高维复合函数，并通过神经网络结合自回归采样的方式，对这一复杂映射进行了统计逼近与实现。</p>
 <p>pytorch中函数名以<code>_</code>做结尾的，通常表示该函数会原地进行操作</p>
 <p>原地修改张量（即数据量较大时）<br>X +&#x3D; Y   或   X[ : ] &#x3D; X + Y<br>会重新分配内存的情况<br>X &#x3D; X+Y</p>
+<h2 id="pytorch-GEMM的精度模式"><a href="#pytorch-GEMM的精度模式" class="headerlink" title="pytorch GEMM的精度模式"></a>pytorch GEMM的精度模式</h2><p>“ieee” 标准 FP32 单精度。数值稳定、精度高，但计算速度相对慢</p>
+<p>“tf32” 保持 FP32 的数值范围，但将精度截断。能大幅加速深度学习矩阵乘法，通常不影响模型收敛</p>
+<p>“bfx9”</p>
 <h2 id="tensor-数据操作"><a href="#tensor-数据操作" class="headerlink" title="tensor 数据操作"></a>tensor 数据操作</h2><p>广播机制中，对于两个张量，维度个数必须相同，同一维度下的元素个数可以不同</p>
 <p>dim&#x3D;0 指张量最外层的维度、dim&#x3D;1 指张量第二外层的维度，以此类推</p>
 <p>torch.tensor对象.sum(dim&#x3D; )<br>将<strong>指定维度对应的括号</strong>内的所有张量按元素相加</p>
@@ -218,7 +221,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-10-07</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-10-09</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
