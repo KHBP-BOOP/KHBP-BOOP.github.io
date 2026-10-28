@@ -34,17 +34,17 @@
     <!-- OpenGraph -->
 
     
-    <meta name="description" content="Tensor Core极大加快矩阵操作、卷积混合精度 无精度损失、更高吞吐率 利用率GPU利用率：采样期间内，一个或多个内核的执行时间占采样周期的百分比内存利用率：采样期间内，一个或多个内核访问全局内存的时间占采样周期的百分比 SM 活跃率occupany 编译过程（简化）.cu源文件  ——》 通用PTX代码 ——–》 各个GPU专属SASS机器码            nvcc">
+    <meta name="description" content="数据从主机端加载至dram&#x2F;L2 cache&#x2F;L1 data cache&#x2F;register file在SM计算核心上执行计算将数据写回 LDGSTS在能够减少寄存器使用量的同时，保证load操作持续进行 支持拷贝4、8、16 Bytes数据4&#x2F;8 Bytes的拷贝对应 L1 ACCESS16 Bytes的拷贝对应 L1 BYPASS 数据应为对应字节数对齐，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CUDA Programming">
 <meta property="og:url" content="http://example.com/2026/07/23/CUDAProgramming/index.html">
 <meta property="og:site_name" content="KHBP&#39;s domain">
-<meta property="og:description" content="Tensor Core极大加快矩阵操作、卷积混合精度 无精度损失、更高吞吐率 利用率GPU利用率：采样期间内，一个或多个内核的执行时间占采样周期的百分比内存利用率：采样期间内，一个或多个内核访问全局内存的时间占采样周期的百分比 SM 活跃率occupany 编译过程（简化）.cu源文件  ——》 通用PTX代码 ——–》 各个GPU专属SASS机器码            nvcc">
+<meta property="og:description" content="数据从主机端加载至dram&#x2F;L2 cache&#x2F;L1 data cache&#x2F;register file在SM计算核心上执行计算将数据写回 LDGSTS在能够减少寄存器使用量的同时，保证load操作持续进行 支持拷贝4、8、16 Bytes数据4&#x2F;8 Bytes的拷贝对应 L1 ACCESS16 Bytes的拷贝对应 L1 BYPASS 数据应为对应字节数对齐，">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/image-9.png">
 <meta property="og:image" content="http://example.com/image.png">
 <meta property="article:published_time" content="2026-07-23T09:47:46.000Z">
-<meta property="article:modified_time" content="2026-10-08T12:36:34.663Z">
+<meta property="article:modified_time" content="2026-10-25T13:27:09.702Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image-9.png">
@@ -142,7 +142,12 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <h3 id="Tensor-Core"><a href="#Tensor-Core" class="headerlink" title="Tensor Core"></a>Tensor Core</h3><p>极大加快矩阵操作、卷积<br>混合精度 无精度损失、更高吞吐率</p>
+        <p>数据从主机端加载至dram&#x2F;L2 cache&#x2F;L1 data cache&#x2F;register file<br>在SM计算核心上执行计算<br>将数据写回</p>
+<h3 id="LDGSTS"><a href="#LDGSTS" class="headerlink" title="LDGSTS"></a>LDGSTS</h3><p>在能够减少寄存器使用量的同时，保证load操作持续进行</p>
+<p>支持拷贝4、8、16 Bytes数据<br>4&#x2F;8 Bytes的拷贝对应 L1 ACCESS<br>16 Bytes的拷贝对应 L1 BYPASS</p>
+<p>数据应为<em>对应字节数对齐</em>，即根据运输的数据量（4&#x2F;8&#x2F;16B）使其对齐。最佳情况为128B对齐</p>
+<p>LDGSTS命令在运输完成后需要提供一个信号，可以通过SMEM屏障、pipeline实现<br>由于CTA内每个线程之间<em>借助LDGSTS命令进行的拷贝操作</em>是异步的，所以当这些SMEM上的数据需要在CTA范围内被共享时，<code>__syncthread()</code> 是必不可少的</p>
+<h3 id="Tensor-Core"><a href="#Tensor-Core" class="headerlink" title="Tensor Core"></a>Tensor Core</h3><p>极大加快矩阵操作、卷积<br>混合精度 无精度损失、更高吞吐率</p>
 <h3 id="利用率"><a href="#利用率" class="headerlink" title="利用率"></a>利用率</h3><p>GPU利用率：采样期间内，<em>一个或多个内核的执行时间</em>占采样周期的百分比<br>内存利用率：采样期间内，<em>一个或多个内核访问全局内存的时间</em>占采样周期的百分比</p>
 <p>SM 活跃率<br>occupany</p>
 <h3 id="编译过程（简化）"><a href="#编译过程（简化）" class="headerlink" title="编译过程（简化）"></a>编译过程（简化）</h3><p>.cu源文件  ——》 通用PTX代码 ——–》 各个GPU专属SASS机器码<br>            nvcc                GPU驱动</p>
@@ -157,6 +162,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">myKernel&lt;&lt;&lt;grid, block&gt;&gt;&gt;(args);</span><br><span class="line"></span><br><span class="line">// 检查启动过程中的错误</span><br><span class="line">cudaError_t err = cudaGetLastError();</span><br><span class="line">if (err != cudaSuccess) &#123;</span><br><span class="line">    printf(&quot;Kernel launch error: %s\n&quot;, cudaGetErrorString(err));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 等待执行完成并检查运行过程中的错误</span><br><span class="line">err = cudaDeviceSynchronize();</span><br><span class="line">if (err != cudaSuccess) &#123;</span><br><span class="line">    printf(&quot;Kernel execution error: %s\n&quot;, cudaGetErrorString(err));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数指定"><a href="#参数指定" class="headerlink" title="参数指定"></a>参数指定</h3><p>BLOCK_SIZE一般为256，设定为32的倍数是为了避免少量的线程浪费；<br>或使用Occupancy API：<br><strong>静态声明共享内存</strong><br>cudaOccupancyMaxPotentialBlockSize(<br>    &amp;minGridSize,   &#x2F;&#x2F; 输出参数，返回达到最大占用率所需的最小grid大小<br>    &amp;blockSize,     &#x2F;&#x2F; 输出参数，返回推荐的块大小<br>    myKernel,       &#x2F;&#x2F; kernel 函数指针<br>    0,              &#x2F;&#x2F; 动态共享内存大小<br>    0               &#x2F;&#x2F; Block 大小上限（0 &#x3D; 不限制）<br>);<br><strong>动态声明共享内存</strong><br>cudaOccupancyMaxPotentialBlockSizeVariableSMem(<br>    &amp;minGridSize，      &#x2F;&#x2F; 输出参数，返回达到最大占用率所需的最小grid大小<br>    &amp;blockSize，        &#x2F;&#x2F; 输出参数，返回推荐的块大小<br>    MyKernel，          &#x2F;&#x2F; kernel 函数指针<br>    smemSizeFunctor，   &#x2F;&#x2F; 函数对象，用于计算动态共享内存大小<br>    0                 &#x2F;&#x2F; blockSizeLimit，设为0表示无限制<br>)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> minGridSize = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> blockSize = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">cudaOccupancyMaxPotentialBlockSize</span>(&amp;minGridSize, &amp;blockSize, testFunc, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="type">int</span> gridSize = (<span class="number">1024</span> + blockSize - <span class="number">1</span>) / blockSize;</span><br></pre></td></tr></table></figure>
 <h3 id="warp"><a href="#warp" class="headerlink" title="warp"></a>warp</h3><p>SM（Streaming Multiprocessor）以 Warp 为粒度调度执行。同一Warp内的threads在同一时钟周期内执行同一条指令（对应SIMT编程模型）</p>
 <h4 id="warp-divergence"><a href="#warp-divergence" class="headerlink" title="warp divergence"></a>warp divergence</h4><p>遵循SIMT范式的代码中出现分支路径且各个分支运行的线程数量不可忽略，出现算力浪费</p>
 <h3 id="Occupancy"><a href="#Occupancy" class="headerlink" title="Occupancy"></a>Occupancy</h3><p>同一 SM 上实际活跃的 Warp 数 &#x2F; SM 理论支持的最大 Warp 数</p>
@@ -182,12 +188,43 @@
 <p>__shfl_down_sync(0xffffffff, val, offset);</p>
 <h3 id="GPU执行模型"><a href="#GPU执行模型" class="headerlink" title="GPU执行模型"></a>GPU执行模型</h3><p>线程数应远高于核心数或指令管线数<br>线程块数应数倍高于SM数（如果总 block 数量刚好能被一个完整 wave 的容量大小整除，那么波数是整数；否则就会出现小数或非整数波数，表示存在 partial wave，导致尾部效应tail effect，同时这通常意味着GPU资源利用率的下降，对于执行时间较短的kernel的影响尤其明显。对于高端 GPU，通常只有线程块少于 300 个的启动才需要检查尾部效应）</p>
 <p>wave代表一个包含并行执行的线程的集合</p>
-<p>指针别名</p>
-<p>__restrict__</p>
+<p>request 由高层次内存发出，低层次内存处理<br>request类型不同，数据运输的起点终点不同。从低层次内存为起点，高层次内存为重点或相反。</p>
+<h1 id="硬件模型"><a href="#硬件模型" class="headerlink" title="硬件模型"></a>硬件模型</h1><h2 id="以通用计算为目的的异构并行计算模型"><a href="#以通用计算为目的的异构并行计算模型" class="headerlink" title="以通用计算为目的的异构并行计算模型"></a>以通用计算为目的的异构并行计算模型</h2><p>单指令多线程（Single Instruction, Multiple Threads, SIMT）是专门为GPU设计的并行计算模式。在统一的指令流控制下，多个线程在不同的数据上并行执行相同的操作</p>
+<p>该异构模型的host为CPU、device为GPU，CPU管理二者的资源、调度GPU执行工作<br>Grid 是由thread blocks组成的<em>1D或2D或3D列阵</em>，即thread blocks的集合<br>Block 是由threads组成的<em>1D或2D或3D列阵</em>，即threads的集合。Block的等价说法 - CTA<br>Thread</p>
+<p>为了使并行计算具有灵活性，设计出grid、block、thread的层次结构，该层次结构以CTA为核心。</p>
+<p>同一CTA中的所有threads必须在同一块SM上并行执行，位于不同CTA的thread则不一定能同时执行，保持并行执行的同时增加了在时间上的调度灵活性<br>shared memory、同步屏障进一步开发了这一概念<br>来自不同CTA的threads的执行时间不一定相同、不一定运行在相同SM上，所以每个CTA之间一定是独立的，不存在<em>某一CTA中的thread依赖另一CTA中thread的运行结果</em>的情况。同时，来自不同grid的threads的执行时间有可能相同、有可能运行在相同SM上<br>CUDA 编程模型要求线程块可以按任意顺序并行或串行执行<br>不使用__syncthreads()的情况下，warp之间的执行不保证同步</p>
+<p>每SM的CTA数量 被称为CTA occupancy，一个SM的CTA数量大小由单个CTA所需资源的多少决定<br>某一时刻下，GPU上并行执行的所有CTA的集合称为wave<br>wave的size被每SM的CTA数量和kernel占用率影响</p>
+<h2 id="流式多处理器"><a href="#流式多处理器" class="headerlink" title="流式多处理器"></a>流式多处理器</h2><p>由SM实现SIMT这一<em>执行模型</em></p>
+<p>SM使用<em>程序计数器</em>和<em>调用堆栈</em>维护每个thread的执行状态</p>
+<p>独立线程调度模型</p>
+<p>SM sub-partitions:<br>constant cache 即 imc（Immediate Constant Cache）<br>L0 instruction cache<br>register files</p>
+<p>SM：<br>SM sub-partitions<br>L1 instruction cache<br>L1 data cache 即 l1&#x2F;tex cache</p>
+<h2 id="memory"><a href="#memory" class="headerlink" title="memory"></a>memory</h2><h2 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h2><h4 id="L2-cache（ltc-level-two-cache）"><a href="#L2-cache（ltc-level-two-cache）" class="headerlink" title="L2 cache（ltc - level two cache）"></a>L2 cache（ltc - level two cache）</h4><p>负责执行缓存、压缩、全局原子操作等</p>
+<p>其缓存工作可以在一个LTS（level two cache slice）上理解：<br>LTS即为L2 cache slice（L2缓存子分区），L1TEX miss后，LTS的工作分为tag stage和data stage；<br>tag stage负责判断该次访问是miss还是hit<br>data stage负责返回数据（hit）或通过memory controler与DRAM交互（miss）</p>
+<blockquote>
+<p>Nsight Compute中对应的指标<br>lts__t 对应 Tag stage<br>lts__m 对应 Miss stage<br>lts__d 对应 Data stage</p>
+</blockquote>
+<h4 id="L1-data-cache"><a href="#L1-data-cache" class="headerlink" title="L1 data cache"></a>L1 data cache</h4><p>一个SM有一个L1 data cache，在某个SM上执行的属于同一CTA的threads，可以共享一块内存空间，该空间对应<br><em>L1 data cache上的某一小部分区域</em></p>
+<p>用户管理的Shared Memory 与 L1&#x2F;TEX Cache 底层上共用一块物理内存<br>L1 data cache、shared data cache、Texture data cache are one and the same.</p>
+<p>L1 data cache从SM和TEX两个单元接收request；具体而言，从SM接收global和local memory requests，从TEX接收texture和surface requests。<br>上述request对应的访存操作访问的均为global内存空间</p>
+<p>L1 data cache接收到requests后，根据请求类型的不同各自在load&#x2F;store unit或unit related to texture access进行tag stage和data stage</p>
+<ul>
+<li>访问SMEM的requests经过input接口进入后，由于用户管理的Shared Memory 与 L1&#x2F;TEX Cache 底层上共用一块物理内存，故不存在缓存未命中的概念，此时直接返回</li>
+<li>访问global&#x2F;local的requests经过input接口进入后，依次经历tag stage和data stage，hit则直接通过LSU data pipeline返回，miss则从L2得到数据后再返回</li>
+<li>访问texture&#x2F;surface的requests经过input接口进入后，依次经历tag stage和data stage，hit则直接通过TEX data pipeline返回，miss则从L2得到数据后再返回</li>
+</ul>
+<blockquote>
+<p>lsu - load&#x2F;store unit<br>lsuin - load&#x2F;store unit input</p>
+</blockquote>
+<blockquote>
+<p>Nsight Compute中对应的指标<br><code>l1tex__lsuin_*</code>：观察 LSUIN 的请求入口活动<br><code>l1tex__texin_*</code>：观察 TEXIN 的请求入口活动<br><code>l1tex__data_pipe_lsu_*</code>：观察 LSU Data 数据通路的活动<br><code>l1tex__data_pipe_tex_*</code>：观察 TEX Data 数据通路的活动</p>
+</blockquote>
+<h1 id="pipeline"><a href="#pipeline" class="headerlink" title="pipeline"></a>pipeline</h1><p>指针别名</p>
+<p><code>__restrict__</code></p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-10-08</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-10-25</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 

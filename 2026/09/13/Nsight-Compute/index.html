@@ -42,7 +42,7 @@
 <meta property="og:description" content="一个函数在给定的计算平台上的性能通常被三个因素限制内存带宽 数学计算带宽 延迟 大多数情况下，合并访问针对全局内存而言。在现代profiler术语中，uncoalesced shared accesses可被理解为probably bank-conflicted；excessive wavefronts意为超额的内存事务，其中wavefronts为memory transaction的另一种说法，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-09-13T01:21:56.000Z">
-<meta property="article:modified_time" content="2026-10-09T07:57:41.594Z">
+<meta property="article:modified_time" content="2026-10-20T04:10:19.680Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -142,6 +142,7 @@
 <h2 id="关键指标"><a href="#关键指标" class="headerlink" title="关键指标"></a>关键指标</h2><p>wave per SM<br>如果总 block 数量刚好能被一个完整 wave 的容量大小整除，那么波数是整数；否则就会出现小数或非整数波数，表示存在 partial wave，导致尾部效应tail effect，同时这通常意味着GPU资源利用率的下降，对于执行时间较短的kernel的影响尤其明显</p>
 <p>流多处理器效率（SM Efficiency）</p>
 <p>每线程的寄存器文件占用量是影响sm occupancy的重要因素。oc高不代表性能一定高，但oc过低总代表较弱的隐藏延迟的能力</p>
+<p>warp scheduler的issue activity低于20% 可能原因：<br>sm无待处理数据（内存带宽不足、occu过低）、sm执行单元满负载、等待同步</p>
 <h2 id="Roofline-Chart"><a href="#Roofline-Chart" class="headerlink" title="Roofline Chart"></a>Roofline Chart</h2><p>性能 (FLOP&#x2F;s) &#x3D; 算术强度 (FLOP&#x2F;byte) × 内存带宽 (byte&#x2F;s)<br>log y &#x3D; log a + log x  </p>
 <ul>
 <li>故Roofline图中内存瓶颈部分表现为斜率为1、截距为带宽值对数的一次函数<br>斜线的截距（也就是在纵轴上的高低位置）直接由带宽大小决定</li>
@@ -152,6 +153,27 @@
 <li>消除计算瓶颈：在计算受限区，优化代码的并行性和指令流水线，让任务点向上移动贴近水平线</li>
 </ol>
 <h2 id="Memory-Chart"><a href="#Memory-Chart" class="headerlink" title="Memory Chart"></a>Memory Chart</h2><p>GPU内存层次结构中两个组件之间的物理通信总线的利用率 &#x3D; (实际传输字节数 &#x2F; 采样时间) ÷ 该链路理论峰值带宽</p>
+<h2 id="Warp-State-Statistics-指标含义"><a href="#Warp-State-Statistics-指标含义" class="headerlink" title="Warp State Statistics 指标含义"></a>Warp State Statistics 指标含义</h2><ul>
+<li><p>Warp Cycles Per Issued Instruction [cycle]<br>warp scheduler每发射一条指令，平均一个warp活跃的cycle数。  </p>
+<blockquote>
+<p>每次发射指令时，warp scheduler从eligible warps中选择一个warp，发射一条或多条指令，该eligible warp变为issued warp</p>
+</blockquote>
+</li>
+<li><p>Avg. Active Threads Per Warp<br>每个warp中，执行了某条指令的thread的数量&#x2F;占比<br>以.ratio为后缀时，数值以绝对值表示，如32<br>以.pct为后缀时，数值以百分比表示，如100%</p>
+</li>
+<li><p>Warp State (All Cycles) 图表<br><em>当warp scheduler无法在每个cycle中都发射指令时，应借助该图表排查原因</em><br>反映了warp stall时各类原因的占比情况，各项对应的值相加后<strong>等于</strong>Warp Cycles Per Issued Instruction [cycle]的值</p>
+</li>
+</ul>
+<h2 id="Scheduler-Statistics-指标含义"><a href="#Scheduler-Statistics-指标含义" class="headerlink" title="Scheduler Statistics 指标含义"></a>Scheduler Statistics 指标含义</h2><ul>
+<li><p>No Eligible [%]<br>smsp中的warp scheduler未找到可发射指令时的活跃周期数 的占比</p>
+</li>
+<li><p>One or More Eligible [%]（与Issued Warp Per Scheduler指标采用同一个基础计数器，有效位上的数字一致）<br>smsp中的warp scheduler发射一条或多条指令时的活跃周期数 的占比<br>通常可以理解为issue slot的利用率，过低通常意味着延迟隐藏不佳</p>
+</li>
+<li><p>Active Warps Per Scheduler [warp]<br>每个活跃周期中，smsp上active warps的平均数量</p>
+</li>
+<li><p>Issued Warp Per Scheduler（与One or More Eligible指标采用同一个基础计数器，有效位上的数字一致）<br>每个活跃周期中，smsp中的warp scheduler发射指令的平均数量（取值范围0 ~ 1，因为<strong>每个smsp每cycle最多发射一条指令</strong>）</p>
+</li>
+</ul>
 <h2 id="kernel-replay"><a href="#kernel-replay" class="headerlink" title="kernel replay"></a>kernel replay</h2><p>保存GPU memory中kernel可被访问的部分的backup；<br>第一次replay pass后，确定实际被写入的部分，即subset；<br>之后的每次replay pass，只需将subset restore回原始位置</p>
 <ul>
 <li>为什么需要replay？<br>单次 pass 能同时采集的硬件性能计数器有限，需要通过多个 replay pass 分批采集不同的 metrics，最终组合成完整的分析结果</li>
@@ -159,6 +181,12 @@
 </ul>
 <h2 id="port端口"><a href="#port端口" class="headerlink" title="port端口"></a>port端口</h2><p>GPU 中的很多单元（例如缓存、存储单元、SM 内部某些模块等）会用一个公共的数据端口来同时处理输入流量和输出流量，读和写、进和出可能共用同一个物理端口，而不是各自独立拥有端口。共享这个端口的各条“链路”（可以理解为某一种流量、某一个方向、某一个子通道）单独看，可能利用率都不高，远没有达到它们各自的峰值带宽；但是，所有这些链路加在一起的总流量，可能已经把这个共享端口的峰值带宽用满了</p>
 <p>当 NCU 显示某个单元的数据端口利用率已经接近峰值时，即使各个子链路利用率不高，也不能认为没有瓶颈，需要关注的是端口级别的聚合带宽，而不是某一条热点链路的单路带宽<br>优化方向应该是降低该端口的总流量，例如减少不必要的读写、改善数据复用、调整访问模式以减少对同一端口的争用。</p>
+<h2 id="Nsight-Compute-CLI-命令选项"><a href="#Nsight-Compute-CLI-命令选项" class="headerlink" title="Nsight Compute CLI 命令选项"></a>Nsight Compute CLI 命令选项</h2><ul>
+<li><p>–target-processes all<br>自动追踪地 profile <strong>host端</strong>当前进程及其子进程</p>
+</li>
+<li><p>–import-source<br>设为on之后，会将可用的源文件永久导入到报告中，缺失的源文件会在<em>源查找文件夹</em>（Source Lookup folders）中搜索。<br>源代码信息必须通过例如<em>添加nvcc选项-lineinfo</em>的方式被嵌入到可执行文件中</p>
+</li>
+</ul>
 <h2 id="计算分诊指南"><a href="#计算分诊指南" class="headerlink" title="计算分诊指南"></a>计算分诊指南</h2><p>自顶向下的关于CUDA kernel性能分析问题的工作流，针对于在NVIDIA GPUs上使用Nsight compute进行分析工作的场景。</p>
 <p>迭代优化方案</p>
 <ol>
@@ -171,13 +199,38 @@
 <ul>
 <li>SOL即理论峰值吞吐量（可以是kernel执行期间的、活跃期间的等等）</li>
 </ul>
-<p>d0. 收集到的指标是否可靠？<br>    kernel执行时间 和 nsys中对应wall-time 差距超过两倍？<br>    编译选项未包含 -O2&#x2F;release -lineinfo ？</p>
+<p>d0. 收集到的指标是否可靠？  </p>
+<ol>
+<li><p>kernel执行时间 和 nsys中对应wall-time 差距超过两倍？</p>
+<blockquote>
+<p>硬件计数器采集到的内核纯执行时间 gpu__time_duration.sum<br>  内核生命周期总耗时 Nsight Systems wall-time</p>
+</blockquote>
+</li>
+<li><p>编译选项未包含 -O2&#x2F;release -lineinfo ？</p>
+</li>
+</ol>
 <p>d1. 工作负载是否过小？<br>    waves per SM 是否小于1?<br>    block_size是否不是32（一个warp中线程的数量）的倍数？<br>    block_size是否过小？每个SM的block槽位有限。负载相同情况下，block尺寸过小会导致SM上SMEM、寄存器文件等资源的浪费<br>    除非工作负载主要由Tensor Core主导，或计算SOL很高，或内存SOL很高，否则当实际占用率低于60%时，工作负载过小，原因是grid并行性不足。<br>    PM sampling 图</p>
-<p>d2. 受流水线延迟限制还是受过少的吞吐量的限制？<br><em>工作负载已足够大，但可能存在不确定的瓶颈</em><br>    比较SM的计算利用率和内存利用率</p>
+<p>d2. 受流水线延迟限制还是受过少的吞吐量的限制？<br><strong>工作负载已足够大，但可能存在不确定的瓶颈</strong></p>
+<ol>
+<li><p>比较SM的计算利用率和内存利用率</p>
+<ul>
+<li>二者均小于80%</li>
+<li>计算利用率大于80%，内存利用率比起前者低<em>超过15%-20%</em><br>  sm中的某条或某几条管线负载过大。</li>
+<li>内存利用率大于80%，计算利用率比起前者低<em>超过15%-20%</em></li>
+<li>二者均大于80%</li>
+</ul>
+</li>
+<li><p>当Memory Throughput高但DRAM Throughput低时，检查profile期间的：system地址窗口和peer地址窗口的流量情况、PCIE总线上是否有大量数据传输，以此排查<em>可能存在的</em>频繁地从system&#x2F;peer内存中访问数据的情况</p>
+<blockquote>
+<p>System aperture ：GPU地址空间中用于访问<em>系统内存</em>的窗口<br>  Peer aperture ：GPU地址空间中用于访问<em>另一GPU的显存</em>的窗口<br>  Aperture traffic ：经过上述窗口产生的数据传输量</p>
+</blockquote>
+</li>
+</ol>
+<p>d7. 该算法是否接近硬件极限？<br><strong>拆解计算和访存这两个子系统，找出可能的细分瓶颈项</strong></p>
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-10-09</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-10-20</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 

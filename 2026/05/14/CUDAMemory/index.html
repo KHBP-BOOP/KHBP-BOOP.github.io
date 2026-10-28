@@ -44,7 +44,7 @@
 <meta property="og:image" content="http://example.com/images.png">
 <meta property="og:image" content="http://example.com/image-1.png">
 <meta property="article:published_time" content="2026-05-14T02:51:34.000Z">
-<meta property="article:modified_time" content="2026-09-17T08:43:52.228Z">
+<meta property="article:modified_time" content="2026-10-21T12:32:08.623Z">
 <meta property="article:author" content="KHBP-BOOP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images.png">
@@ -163,12 +163,19 @@
 
 <p>全称Memory Input&#x2F;Output throttle stall，定义：Warp正在等待直到MIO（内存输入&#x2F;输出）指令队列不再处于满状态。</p>
 <ul>
-<li><p>当一个Warp想要发射一条需要由MIO（内存输入&#x2F;输出）单元执行的指令，但该单元的指令队列已满，无法接收新指令时，这个Warp就会停滞，报告为MIO Throttle。</p>
+<li><p>当一个Warp想要发射一条需要由MIO分区内的执行单元执行的指令，但该单元的指令队列已满，无法接收新指令时，这个Warp就会停滞，接着被报告为MIO Throttle</p>
 </li>
-<li><p>MIO是NVIDIA SM（流多处理器）中的一个分区，包含多个执行单元。其指令队列及对应的执行单元主要包括：<br> 1.mio_throttle: 地址计算单元(ADU)、一致性总线单元(CBU)、加载存储单元(LSU)、以及执行特殊数学指令的单元(XU)。<br> 2.lg_throttle: 同样是LSU，但这是一个更精细的计数器。当MIO队列中本地(Local)和全局(Global)内存指令达到一定水位时，会单独报告为LG Throttle，以优先保证共享内存指令的发射。<br> 3.tex_throttle: 纹理单元(TEX)的队列满了会单独报告。</p>
+<li><p>MIO是NVIDIA SM（流多处理器）中的一个分区，包含多个执行单元。各个执行单元及其指令队列可以进行如下分类：</p>
 </li>
 </ul>
+<ol>
+<li>mio_throttle（（通用）MIO队列阻塞）：当<strong>MIO指令队列</strong>已满时触发。该队列主要处理发往MIO分区内除*纹理单元（TEX）和本地&#x2F;全局内存（LG）*专用队列之外的其他执行单元的指令，例如：<br>共享内存（Shared Memory）访问（虽然也经过LSU，但队列路径有区分）。<br>特殊数学指令（如MUFU&#x2F;XU管道）<br>动态分支指令（ADU）等</li>
+<li>lg_throttle（L&#x2F;G专用队列阻塞）：当<strong>本地&#x2F;全局内存专用的L1指令队列</strong>达到水印（watermark）或满时触发。它专门服务于LSU发出的、目标为本地或全局内存的加载&#x2F;存储指令。</li>
+<li>tex_throttle（TEX专用队列阻塞）：当**纹理单元专用的指令队列（TEXIN FIFO）**已满时触发。它专门服务于纹理获取（Texture Fetch）、表面加载&#x2F;存储（Surface Load&#x2F;Store）等发往纹理单元的指令。</li>
+</ol>
 <p>产生原因：根本原因是MIO流水线（Pipelines）被过度利用。具体来说，以下操作类型如果过于密集，都可能导致MIO队列堵塞：<br>内存访问频繁，存取指令过多、<br>特殊数学指令过多、<br>Kernel使用的寄存器超出硬件限制，编译器将数据“溢出”到本地内存，显著增加L1缓存和内存I&#x2F;O的流量，从而加剧MIO队列的压力</p>
+<p>L1TEX unit包含L1 data cache和两条执行方式为并行执行的pipeline：LSU、TEX</p>
+<p>它们都是L1TEX处理不同操作时对应的专用执行单元，在微架构上以pipeline形式被实现？<br>lsu和L1TEX是强绑定&#x2F;强相关的吗？<br>所有类型的数据传输时都要经过L1TEX吗？</p>
 </details>
 
 
@@ -178,7 +185,7 @@
 
 <p>共享内存被划分为多个（现代Volta、Turing、Ampere架构中为32个，与 Warp 大小一致）Bank，每个 Bank 宽 4 Bytes（32 bits），连续的 4 Byte 字被分配到连续的 Bank。<br>每个时钟周期，每个 Bank 只能服务一次读或写请求。如果同一个 Warp 中有多个线程访问同一个 Bank 的不同地址，这些访问必须串行化，直到请求该 Bank 数据的每个线程都已成功获取数据。</p>
 <p>从程序员视角判断 bank conflict 时，分析的基本单位是一个 warp（32 个线程）</p>
-<p>多个warp的执行是分时调度的；一个warp的一次共享内存请求通常被拆分为一个或多个事务，同一warp的多个memory transaction的执行是流水线式串行执行的；<br>所以不同warp之间访问同一bank、同一warp不同memory transaction之间访问同一bank均不会造成bank conflict。<br>Bank conflict是否会发生，在单个memory transaction内部判定。<br>当一个 warp 使用 float4 访问 shared memory 时，由于单线程访问宽度为16B，硬件可能将一个warp请求拆分成多个transaction（例如每个128B transaction包含8个线程）。此时需要分别检查每个transaction内部线程访问的bank分布，而不是直接按整个warp判断。  </p>
+<p>多个warp的执行是分时调度的；一个warp的一次共享内存请求通常被拆分为一个或多个事务，同一warp的多个memory transaction的执行是流水线式串行执行的；<br>所以不同warp之间访问同一bank、同一warp不同memory transaction之间访问同一bank均不会造成bank conflict。<br>Bank conflict是否会发生，在单个memory transaction内部判定。<br>例如当一个 warp 使用 float4 访问 shared memory 时，由于单线程访问宽度为16B，硬件可能将一个warp请求拆分成多个transaction（例如每个128B transaction包含8个线程）。此时需要分别检查每个transaction内部线程访问的bank分布，而不是直接按整个warp判断。  </p>
 <p>Ampere架构前，bank conflict可能发生在LDS&#x2F;STS指令执行期间、共享内存原子操作中，Ampere架构后，也有可能发生在cp.async&#x2F;LDGSTS写入共享内存的那一步中</p>
 <p>地址 0<del>3:   Bank 0<br>地址 4</del>7:   Bank 1<br>地址 8<del>11:  Bank 2<br>…<br>地址 124</del>127: Bank 31<br>地址 128~131: Bank 0  （循环）<br>…</p>
 <p><img src="/images.png" alt="alt text"></p>
@@ -193,15 +200,15 @@
 </details>
 
 
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>用户管理的Shared Memory 与 L1&#x2F;TEX Cache 底层上共用一块物理内存<br>L1 data cache、shared data cache、Texture data cache are one and the same.</p>
+
 <h2 id="寄存器文件与局部内存"><a href="#寄存器文件与局部内存" class="headerlink" title="寄存器文件与局部内存"></a>寄存器文件与局部内存</h2><p>kernel 中的局部变量默认分配在寄存器，单个线程用的寄存器越多，sm上能并行执行的warp就越少（即occupancy会下降）；如占用数量超过寄存器数量，则会溢出至局部内存（位于GPU全局内存上），速度骤降</p>
 <p>实际应用中，先保证没有寄存器溢出，再考虑 Occupancy</p>
 <h2 id="常见GPU计算模式"><a href="#常见GPU计算模式" class="headerlink" title="常见GPU计算模式"></a>常见GPU计算模式</h2><ol>
-<li><p>从全局内存拉取数据 存储至SMEM<br><em>一个寄存器对全局内存的一次load 从寄存器到SMEM的一次store</em><br><em>LDG STS</em>  </p>
+<li><p>从全局内存拉取数据 存储至SMEM<br><em>从全局内存 load至 寄存器 从寄存器 store至 SMEM</em><br><em>LDG STS</em>  </p>
 </li>
 <li><p>在SMEM上计算数据</p>
 </li>
-<li><p>数据从SMEM写回全局内存<br><em>一个寄存器对SMEM的一次load 从寄存器到全局内存的一次store</em><br><em>LDS STG</em></p>
+<li><p>数据从SMEM写回全局内存<br><em>从SMEM load至 寄存器；从寄存器 store至 全局内存</em><br><em>LDS STG</em></p>
 </li>
 </ol>
 <h1 id="Memory-Transaction-拆分机制："><a href="#Memory-Transaction-拆分机制：" class="headerlink" title="Memory Transaction 拆分机制："></a>Memory Transaction 拆分机制：</h1><p>float 访存（32 bit&#x2F;线程）：一个 warp 访问 128 bytes，恰好一个 memory transaction<br>float2 访存（64 bit&#x2F;线程）：一个 warp 访问 256 bytes，拆分为 2 个 memory transaction，每组 16 个线程（half-warp）<br>float4 访存（128 bit&#x2F;线程）：一个 warp 访问 512 bytes，拆分为 4 个 memory transaction，每组 8 个线程（quarter-warp）</p>
@@ -220,8 +227,6 @@
 <p><img src="/image-1.png" alt="alt text"></p>
 <p>虽然同一个 Warp 内的线程可通过__syncwarp()实现同步，但指令同步不等于数据可见。如果数据被锁死在私有寄存器里，其他线程无法访问</p>
 <p>片上缓存即GPU芯片内部存储空间，主要包括：<br>寄存器文件<br>L1 cache 共享内存<br>L2 cache</p>
-<p>CUDA 编程模型要求线程块可以按任意顺序并行或串行执行</p>
-<p>单指令多线程（Single Instruction, Multiple Threads, SIMT）是专门为GPU设计的并行计算模式。在统一的指令流控制下，多个线程在不同的数据上并行执行相同的操作<br>不使用__syncthreads()的情况下，warp之间的执行不保证同步<br>线程块之间的执行顺序不确定</p>
 <p>sm组成：</p>
 <p>指令调度器<br>多种指令执行管线（执行线程、通过共享内存或同步机制进行块内线程的通信）</p>
 <p>Tensor Core 指令的运算粒度是小矩阵块级别，而不是单个元素级别<br>计算和累加时的精度高于输入数据的精度<br>当计算无法借助矩阵形式表示时，由cuda core执行计算而不是tensor core</p>
@@ -260,7 +265,7 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>updated at 2026-09-17</p></div> 
+    <div class="post-footer__meta"><p>updated at 2026-10-21</p></div> 
     <div class="post-entry__tags"></div> 
 </article>
 
